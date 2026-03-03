@@ -33,7 +33,7 @@ export const sandboxFormSchema = z.object({
 export type SandboxForm = z.infer<typeof sandboxFormSchema>;
 
 // Main CC Options Form Schema
-export const ccOptionsFormSchema = z.object({
+export const bbOptionsFormSchema = z.object({
   model: z.string().optional(),
   disallowedTools: z.array(z.string()).optional(),
   systemPrompt: systemPromptFormSchema.optional(),
@@ -45,7 +45,7 @@ export const ccOptionsFormSchema = z.object({
   maxBudgetUsd: z.number().nonnegative().optional(),
 });
 
-export type CCOptionsForm = z.infer<typeof ccOptionsFormSchema>;
+export type CCOptionsForm = z.infer<typeof bbOptionsFormSchema>;
 
 const defaultSettingSources: Array<"user" | "project" | "local"> = [
   "user",

@@ -133,7 +133,7 @@ export const claudeCommandsQuery = (projectId: string) =>
 export const sessionProcessesQuery = {
   queryKey: ["sessionProcesses"],
   queryFn: async () => {
-    const response = await honoClient.api["claude-code"][
+    const response = await honoClient.api["blackbox-cli"][
       "session-processes"
     ].$get({});
 
@@ -271,7 +271,7 @@ export const systemVersionQuery = {
 export const claudeCodeMetaQuery = {
   queryKey: ["cc", "meta"],
   queryFn: async () => {
-    const response = await honoClient.api["claude-code"].meta.$get();
+    const response = await honoClient.api["blackbox-cli"].meta.$get();
 
     if (!response.ok) {
       throw new Error(
@@ -286,7 +286,7 @@ export const claudeCodeMetaQuery = {
 export const claudeCodeFeaturesQuery = {
   queryKey: ["cc", "features"],
   queryFn: async () => {
-    const response = await honoClient.api["claude-code"].features.$get();
+    const response = await honoClient.api["blackbox-cli"].features.$get();
 
     if (!response.ok) {
       throw new Error(

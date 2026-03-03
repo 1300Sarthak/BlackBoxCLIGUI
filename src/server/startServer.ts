@@ -6,13 +6,11 @@ import { serveStatic } from "@hono/node-server/serve-static";
 import { Effect, Layer } from "effect";
 import { AgentSessionLayer } from "./core/agent-session";
 import { AgentSessionController } from "./core/agent-session/presentation/AgentSessionController";
-import { ClaudeCodeController } from "./core/claude-code/presentation/ClaudeCodeController";
-import { ClaudeCodePermissionController } from "./core/claude-code/presentation/ClaudeCodePermissionController";
-import { ClaudeCodeSessionProcessController } from "./core/claude-code/presentation/ClaudeCodeSessionProcessController";
-import { ClaudeCodeLifeCycleService } from "./core/claude-code/services/ClaudeCodeLifeCycleService";
-import { ClaudeCodePermissionService } from "./core/claude-code/services/ClaudeCodePermissionService";
-import { ClaudeCodeService } from "./core/claude-code/services/ClaudeCodeService";
-import { ClaudeCodeSessionProcessService } from "./core/claude-code/services/ClaudeCodeSessionProcessService";
+import { BlackboxCliController } from "./core/blackbox-cli/presentation/BlackboxCliController";
+import { BlackboxCliLifeCycleService } from "./core/blackbox-cli/services/BlackboxCliLifeCycleService";
+import { BlackboxCliPermissionService } from "./core/blackbox-cli/services/BlackboxCliPermissionService";
+import { BlackboxCliService } from "./core/blackbox-cli/services/BlackboxCliService";
+import { BlackboxCliSessionProcessService } from "./core/blackbox-cli/services/BlackboxCliSessionProcessService";
 import { SSEController } from "./core/events/presentation/SSEController";
 import { FileWatcherService } from "./core/events/services/fileWatcher";
 import { FeatureFlagController } from "./core/feature-flag/presentation/FeatureFlagController";
@@ -119,9 +117,9 @@ const InfraRepos = Layer.mergeAll(
 const InfraLayer = AgentSessionLayer.pipe(Layer.provideMerge(InfraRepos));
 
 const DomainBase = Layer.mergeAll(
-  ClaudeCodePermissionService.Live,
-  ClaudeCodeSessionProcessService.Live,
-  ClaudeCodeService.Live,
+  BlackboxCliPermissionService.Live,
+  BlackboxCliSessionProcessService.Live,
+  BlackboxCliService.Live,
   GitService.Live,
   SchedulerService.Live,
   SchedulerConfigBaseDir.Live,
@@ -129,7 +127,7 @@ const DomainBase = Layer.mergeAll(
   TasksService.Live,
 );
 
-const DomainLayer = ClaudeCodeLifeCycleService.Live.pipe(
+const DomainLayer = BlackboxCliLifeCycleService.Live.pipe(
   Layer.provideMerge(DomainBase),
 );
 
@@ -149,9 +147,7 @@ const PresentationLayer = Layer.mergeAll(
   SessionController.Live,
   AgentSessionController.Live,
   GitController.Live,
-  ClaudeCodeController.Live,
-  ClaudeCodeSessionProcessController.Live,
-  ClaudeCodePermissionController.Live,
+  BlackboxCliController.Live,
   FileSystemController.Live,
   SSEController.Live,
   SchedulerController.Live,

@@ -35,7 +35,7 @@ import type {
 import { useConfig } from "../../../../hooks/useConfig";
 import { ClaudeCodeSettingsPopover } from "./ClaudeCodeSettingsForm";
 import type { CommandCompletionRef } from "./CommandCompletion";
-import { getDefaultCCOptions } from "./ccOptionsFormSchema";
+import { getDefaultCCOptions } from "./bbOptionsFormSchema";
 import { isInCompletionContext } from "./completionUtils";
 import type { FileCompletionRef } from "./FileCompletion";
 import { processFile } from "./fileUtils";
@@ -45,7 +45,7 @@ export interface MessageInput {
   text: string;
   images?: ImageBlockParam[];
   documents?: DocumentBlockParam[];
-  ccOptions?: CCOptionsSchema;
+  bbOptions?: CCOptionsSchema;
   forkSession?: boolean;
 }
 
@@ -119,7 +119,7 @@ export const ChatInput: FC<ChatInputProps> = ({
   });
   // Initialize with default values so settingSources is always sent correctly
   // even when the user doesn't open the settings popover
-  const [ccOptions, setCCOptions] = useState<CCOptionsSchema | undefined>(
+  const [bbOptions, setCCOptions] = useState<CCOptionsSchema | undefined>(
     getDefaultCCOptions,
   );
   const [forkSession, setForkSession] = useState(true);
@@ -248,7 +248,7 @@ export const ChatInput: FC<ChatInputProps> = ({
         text: message,
         images: images.length > 0 ? images : undefined,
         documents: documents.length > 0 ? documents : undefined,
-        ccOptions: ccOptions,
+        bbOptions: bbOptions,
         forkSession: baseSessionId ? forkSession : undefined,
       });
 
@@ -534,7 +534,7 @@ export const ChatInput: FC<ChatInputProps> = ({
                 )}
                 {enableCCOptions && (
                   <ClaudeCodeSettingsPopover
-                    value={ccOptions}
+                    value={bbOptions}
                     onChange={setCCOptions}
                     disabled={isPending || disabled}
                     showForkOption={Boolean(baseSessionId)}

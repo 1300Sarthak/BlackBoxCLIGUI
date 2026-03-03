@@ -6,9 +6,9 @@ import {
   hasNonDefaultCCOptions,
   transformFormToSchema,
   transformSchemaToForm,
-} from "./ccOptionsFormSchema";
+} from "./bbOptionsFormSchema";
 
-describe("ccOptionsFormSchema", () => {
+describe("bbOptionsFormSchema", () => {
   describe("getDefaultCCOptions", () => {
     test("should return default CCOptionsSchema with settingSources", () => {
       const result = getDefaultCCOptions();

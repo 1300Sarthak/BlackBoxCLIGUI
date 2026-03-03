@@ -1,48 +1,42 @@
 import { Context, Effect, Layer } from "effect";
 import type { ControllerResponse } from "../../../lib/effect/toEffectResponse";
 import type { InferEffect } from "../../../lib/effect/types";
-import { ClaudeCodeService } from "../../claude-code/services/ClaudeCodeService";
-import type { Flag } from "../models/flag";
+import { BlackboxCliService } from "../../blackbox-cli/services/BlackboxCliService";
 
 const LayerImpl = Effect.gen(function* () {
-  const claudeCodeService = yield* ClaudeCodeService;
+  const blackboxCliService = yield* BlackboxCliService;
 
   const getFlags = () =>
     Effect.gen(function* () {
-      const claudeCodeFeatures =
-        yield* claudeCodeService.getAvailableFeatures();
+      const features = yield* blackboxCliService.getAvailableFeatures();
+      const flags = Object.entries(features).map(([key, value]) => ({
+        name: key as keyof typeof features,
+        enabled: value,
+      }));
 
       return {
-        response: {
-          flags: [
-            {
-              name: "tool-approval",
-              enabled: claudeCodeFeatures.canUseTool,
-            },
-            {
-              name: "agent-sdk",
-              enabled: claudeCodeFeatures.agentSdk,
-            },
-            {
-              name: "sidechain-separation",
-              enabled: claudeCodeFeatures.sidechainSeparation,
-            },
-            {
-              name: "uuid-on-sdk-message",
-              enabled: claudeCodeFeatures.uuidOnSDKMessage,
-            },
-            {
-              name: "run-skills-directly",
-              enabled: claudeCodeFeatures.runSkillsDirectly,
-            },
-          ] satisfies Flag[],
-        },
+        response: { flags },
+        status: 200,
+      } as const satisfies ControllerResponse;
+    });
+
+  const getAvailableFeatures = () =>
+    Effect.gen(function* () {
+      const features = yield* blackboxCliService.getAvailableFeatures();
+      const featuresList = Object.entries(features).map(([key, value]) => ({
+        name: key as keyof typeof features,
+        enabled: value,
+      }));
+
+      return {
+        response: { features: featuresList },
         status: 200,
       } as const satisfies ControllerResponse;
     });
 
   return {
     getFlags,
+    getAvailableFeatures,
   };
 });
 

@@ -21,7 +21,7 @@ export type NewClaudeCodeTurnDef = BaseClaudeCodeTurnDef & {
   type: "new"; // new session
   sessionId?: undefined;
   baseSessionId?: undefined;
-  ccOptions?: CCOptions;
+  bbOptions?: CCOptions;
 };
 
 export type ContinueClaudeCodeTurnDef = BaseClaudeCodeTurnDef & {
@@ -34,14 +34,14 @@ export type ResumeClaudeCodeTurnDef = BaseClaudeCodeTurnDef & {
   type: "resume"; // resume from base session process
   sessionId?: undefined;
   baseSessionId: string;
-  ccOptions?: CCOptions;
+  bbOptions?: CCOptions;
 };
 
 export type ForkClaudeCodeTurnDef = BaseClaudeCodeTurnDef & {
   type: "fork"; // fork from base session process
   sessionId: string;
   baseSessionId: string;
-  ccOptions?: CCOptions;
+  bbOptions?: CCOptions;
 };
 
 export type ClaudeCodeTaskDef =

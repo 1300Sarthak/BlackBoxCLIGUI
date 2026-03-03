@@ -1,26 +1,23 @@
 {
   "extends": "@tsconfig/strictest/tsconfig.json",
   "compilerOptions": {
-    // transpile target
     "target": "ES2020",
     "lib": ["dom", "dom.iterable", "esnext"],
     "noEmit": true,
-    // module
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "jsx": "react-jsx",
-    // paths alias
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@anthropic-ai/claude-agent-sdk": ["./src/@anthropic-ai/claude-agent-sdk/index.ts"],
+      "@anthropic-ai/sdk/resources": ["./src/@anthropic-ai/sdk/resources.ts"]
     },
-    // typecheck
     "types": ["node", "vitest/globals", "vite/client"],
     "exactOptionalPropertyTypes": false,
     "noPropertyAccessFromIndexSignature": false,
     "allowJs": true,
     "plugins": [
-      // Effect-TS
       {
         "name": "@effect/language-service"
       }

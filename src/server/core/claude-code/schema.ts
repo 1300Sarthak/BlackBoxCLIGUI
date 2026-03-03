@@ -85,7 +85,7 @@ export type SandboxSettings = z.infer<typeof sandboxSettingsSchema>;
  * Schema for Claude Code options (CCOptions)
  * Based on @anthropic-ai/claude-agent-sdk Options type
  */
-export const ccOptionsSchema = z.object({
+export const bbOptionsSchema = z.object({
   disallowedTools: z.array(z.string()).optional(),
   settingSources: z.array(z.enum(["user", "project", "local"])).optional(),
   systemPrompt: z
@@ -106,4 +106,4 @@ export const ccOptionsSchema = z.object({
   maxBudgetUsd: z.number().optional(),
 });
 
-export type CCOptionsSchema = z.infer<typeof ccOptionsSchema>;
+export type CCOptionsSchema = z.infer<typeof bbOptionsSchema>;
