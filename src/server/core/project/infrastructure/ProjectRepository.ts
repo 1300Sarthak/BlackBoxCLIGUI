@@ -40,29 +40,27 @@ const LayerImpl = Effect.gen(function* () {
 
   const getProjects = () =>
     Effect.gen(function* () {
-      // Check if the claude projects directory exists
-      const dirExists = yield* fs.exists(
-        (yield* context.blackboxCliPaths).blackboxProjectsDirPath,
+      const blackboxTmpPath = path.join(
+        (yield* context.blackboxCliPaths).globalBlackboxDirectoryPath,
+        "tmp"
       );
+
+      // Check if the blackbox tmp directory exists
+      const dirExists = yield* fs.exists(blackboxTmpPath);
       if (!dirExists) {
         console.warn(
-          `Claude projects directory not found at ${(yield* context.blackboxCliPaths).blackboxProjectsDirPath}`,
+          `Blackbox tmp directory not found at ${blackboxTmpPath}`,
         );
         return { projects: [] };
       }
 
-      // Read directory entries
-      const entries = yield* fs.readDirectory(
-        (yield* context.blackboxCliPaths).blackboxProjectsDirPath,
-      );
+      // Read directory entries (each hash directory is a project)
+      const entries = yield* fs.readDirectory(blackboxTmpPath);
 
       // Filter directories and map to Project objects
       const projectEffects = entries.map((entry) =>
         Effect.gen(function* () {
-          const fullPath = path.resolve(
-            (yield* context.blackboxCliPaths).blackboxProjectsDirPath,
-            entry,
-          );
+          const fullPath = path.resolve(blackboxTmpPath, entry);
 
           // Check if it's a directory
           const stat = yield* Effect.tryPromise(() =>
@@ -70,6 +68,13 @@ const LayerImpl = Effect.gen(function* () {
           ).pipe(Effect.catchAll(() => Effect.succeed(null)));
 
           if (!stat || stat.type !== "Directory") {
+            return null;
+          }
+
+          // Check if logs.json exists (valid Blackbox session directory)
+          const logsPath = path.join(fullPath, "logs.json");
+          const logsExists = yield* fs.exists(logsPath);
+          if (!logsExists) {
             return null;
           }
 
