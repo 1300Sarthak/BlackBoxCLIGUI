@@ -28,7 +28,7 @@ const LayerImpl = Effect.gen(function* () {
       const features = yield* claudeCodeService.getAvailableFeatures();
 
       const globalCommands: CommandInfo[] = yield* scanCommandFilesWithMetadata(
-        (yield* context.claudeCodePaths).claudeCommandsDirPath,
+        (yield* context.blackboxCliPaths).blackboxCommandsDirPath,
       );
 
       const projectCommands: CommandInfo[] =
@@ -40,7 +40,7 @@ const LayerImpl = Effect.gen(function* () {
 
       const globalSkills: CommandInfo[] = features.runSkillsDirectly
         ? yield* scanSkillFilesWithMetadata(
-            (yield* context.claudeCodePaths).claudeSkillsDirPath,
+            (yield* context.blackboxCliPaths).blackboxSkillsDirPath,
           )
         : [];
 

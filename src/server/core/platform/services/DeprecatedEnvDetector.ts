@@ -14,16 +14,51 @@ type DeprecatedEnvConfig = {
 };
 
 const DEPRECATED_ENVS: Record<string, DeprecatedEnvConfig> = {
-  // Removed in PR #101
+  // Removed in adaptation to Blackbox
   CLAUDE_CODE_VIEWER_AUTH_PASSWORD: {
     type: "removed",
-    newEnv: "CCV_PASSWORD",
+    newEnv: "BBCV_PASSWORD",
     cliOption: "--password",
   },
   CLAUDE_CODE_VIEWER_CC_EXECUTABLE_PATH: {
     type: "removed",
-    newEnv: "CCV_CC_EXECUTABLE_PATH",
+    newEnv: "BBCV_BB_EXECUTABLE_PATH",
     cliOption: "--executable",
+  },
+  CCV_PASSWORD: {
+    type: "removed",
+    newEnv: "BBCV_PASSWORD",
+    cliOption: "--password",
+  },
+  CCV_CC_EXECUTABLE_PATH: {
+    type: "removed",
+    newEnv: "BBCV_BB_EXECUTABLE_PATH",
+    cliOption: "--executable",
+  },
+  CCV_GLOBAL_CLAUDE_DIR: {
+    type: "removed",
+    newEnv: "BBCV_GLOBAL_BLACKBOX_DIR",
+    cliOption: "--blackbox-dir",
+  },
+  CCV_TERMINAL_DISABLED: {
+    type: "removed",
+    newEnv: "BBCV_TERMINAL_DISABLED",
+    cliOption: "--terminal-disabled",
+  },
+  CCV_TERMINAL_SHELL: {
+    type: "removed",
+    newEnv: "BBCV_TERMINAL_SHELL",
+    cliOption: "--terminal-shell",
+  },
+  CCV_TERMINAL_UNRESTRICTED: {
+    type: "removed",
+    newEnv: "BBCV_TERMINAL_UNRESTRICTED",
+    cliOption: "--terminal-unrestricted",
+  },
+  CCV_API_ONLY: {
+    type: "removed",
+    newEnv: "BBCV_API_ONLY",
+    cliOption: "--api-only",
   },
 };
 
@@ -65,7 +100,8 @@ const detectDeprecatedEnvs = (): DeprecationWarning[] => {
 
 const formatWarning = (warning: DeprecationWarning): string => {
   const prefix = warning.type === "removed" ? "❌ REMOVED" : "⚠️  DEPRECATED";
-  return `${prefix}: ${warning.message}\n   → ${warning.suggestion}`;
+  return `${prefix}: ${warning.message}
+   → ${warning.suggestion}`;
 };
 
 export const checkDeprecatedEnvs = Effect.gen(function* () {
@@ -90,7 +126,7 @@ export const checkDeprecatedEnvs = Effect.gen(function* () {
 
   yield* Console.log("For more details, see:");
   yield* Console.log(
-    "  https://github.com/d-kimuson/claude-code-viewer#configuration",
+    "  https://github.com/sarthak/blackbox-cli-viewer#configuration",
   );
   yield* Console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
   yield* Console.log("");

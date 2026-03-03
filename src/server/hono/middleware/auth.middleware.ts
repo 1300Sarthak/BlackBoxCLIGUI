@@ -1,7 +1,7 @@
 import { Context, Effect, Layer, Runtime } from "effect";
 import { getCookie } from "hono/cookie";
 import { createMiddleware } from "hono/factory";
-import { CcvOptionsService } from "../../core/platform/services/CcvOptionsService";
+import { BbcvOptionsService } from "../../core/platform/services/BbcvOptionsService";
 import type { InferEffect } from "../../lib/effect/types";
 import type { HonoContext } from "../app";
 
@@ -51,13 +51,13 @@ const createAuthRequiredMiddleware = (
 };
 
 const LayerImpl = Effect.gen(function* () {
-  const ccvOptionsService = yield* CcvOptionsService;
-  const runtime = yield* Effect.runtime<CcvOptionsService>();
+  const bbcvOptionsService = yield* BbcvOptionsService;
+  const runtime = yield* Effect.runtime<BbcvOptionsService>();
   const runPromise = Runtime.runPromise(runtime);
 
   return yield* Effect.gen(function* () {
     const getAuthState = Effect.gen(function* () {
-      const authPassword = yield* ccvOptionsService.getCcvOptions("password");
+      const authPassword = yield* bbcvOptionsService.getBbcvOptions("password");
       const authEnabled = authPassword !== undefined;
       const validSessionToken = generateSessionToken(authPassword);
       return { authEnabled, authPassword, validSessionToken };

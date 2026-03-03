@@ -1,7 +1,7 @@
 import type { CommandExecutor, FileSystem, Path } from "@effect/platform";
 import { Effect } from "effect";
 import type { ClaudeCodeLifeCycleService } from "../core/claude-code/services/ClaudeCodeLifeCycleService";
-import type { CcvOptionsService } from "../core/platform/services/CcvOptionsService";
+import type { BbcvOptionsService } from "../core/platform/services/BbcvOptionsService";
 import type { EnvService } from "../core/platform/services/EnvService";
 import type { UserConfigService } from "../core/platform/services/UserConfigService";
 import type { ProjectRepository } from "../core/project/infrastructure/ProjectRepository";
@@ -10,7 +10,7 @@ import type { VirtualConversationDatabase } from "../core/session/infrastructure
 import type { SessionMetaService } from "../core/session/services/SessionMetaService";
 
 export type HonoRuntime =
-  | CcvOptionsService
+  | BbcvOptionsService
   | EnvService
   | SessionMetaService
   | VirtualConversationDatabase

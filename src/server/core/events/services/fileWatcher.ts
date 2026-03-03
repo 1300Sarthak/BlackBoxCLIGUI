@@ -36,7 +36,7 @@ export class FileWatcherService extends Context.Tag("FileWatcherService")<
           const isWatching = yield* Ref.get(isWatchingRef);
           if (isWatching) return;
 
-          const claudeCodePaths = yield* context.claudeCodePaths;
+          const blackboxCliPaths = yield* context.blackboxCliPaths;
 
           yield* Ref.set(isWatchingRef, true);
 
@@ -44,11 +44,11 @@ export class FileWatcherService extends Context.Tag("FileWatcherService")<
             try: async () => {
               console.log(
                 "Starting file watcher on:",
-                claudeCodePaths.claudeProjectsDirPath,
+                blackboxCliPaths.blackboxProjectsDirPath,
               );
 
               const watcher = watch(
-                claudeCodePaths.claudeProjectsDirPath,
+                blackboxCliPaths.blackboxProjectsDirPath,
                 { persistent: false, recursive: true },
                 (_eventType, filename) => {
                   if (!filename) return;
@@ -58,7 +58,7 @@ export class FileWatcherService extends Context.Tag("FileWatcherService")<
 
                   // Build full path to get encoded projectId
                   const fullPath = path.join(
-                    claudeCodePaths.claudeProjectsDirPath,
+                    blackboxCliPaths.blackboxProjectsDirPath,
                     filename,
                   );
                   const encodedProjectId =

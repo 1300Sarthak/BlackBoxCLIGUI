@@ -2,7 +2,7 @@
 import { Command } from "commander";
 import { Effect } from "effect";
 import packageJson from "../../package.json" with { type: "json" };
-import type { CliOptions } from "./core/platform/services/CcvOptionsService";
+import type { CliOptions } from "./core/platform/services/BbcvOptionsService";
 import { checkDeprecatedEnvs } from "./core/platform/services/DeprecatedEnvDetector";
 import { startServer } from "./startServer";
 
@@ -18,8 +18,8 @@ program
   .option("-p, --port <port>", "port to listen on")
   .option("-h, --hostname <hostname>", "hostname to listen on")
   .option("-P, --password <password>", "password to authenticate")
-  .option("-e, --executable <executable>", "path to claude code executable")
-  .option("--claude-dir <claude-dir>", "path to claude directory")
+  .option("-e, --executable <executable>", "path to blackbox ai cli executable")
+  .option("--blackbox-dir <blackbox-dir>", "path to blackbox directory")
   .option(
     "--terminal-disabled",
     "disable the in-app terminal panel when enabled",

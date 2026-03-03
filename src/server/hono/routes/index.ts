@@ -5,9 +5,9 @@ import { createMiddleware } from "hono/factory";
 import prexit from "prexit";
 import packageJson from "../../../../package.json" with { type: "json" };
 import {
-  CcvOptionsService,
+  BbcvOptionsService,
   type CliOptions,
-} from "../../core/platform/services/CcvOptionsService";
+} from "../../core/platform/services/BbcvOptionsService";
 import { EnvService } from "../../core/platform/services/EnvService";
 import { UserConfigService } from "../../core/platform/services/UserConfigService";
 import { userConfigSchema } from "../../lib/config/config";
@@ -51,8 +51,8 @@ const createApiOnlyMiddleware = (apiOnly: boolean) =>
 
 export const routes = (app: HonoAppType, options: CliOptions) =>
   Effect.gen(function* () {
-    const ccvOptionsService = yield* CcvOptionsService;
-    yield* ccvOptionsService.loadCliOptions(options);
+    const bbcvOptionsService = yield* BbcvOptionsService;
+    yield* bbcvOptionsService.loadCliOptions(options);
 
     const envService = yield* EnvService;
     const userConfigService = yield* UserConfigService;
@@ -60,7 +60,7 @@ export const routes = (app: HonoAppType, options: CliOptions) =>
 
     const { authRequiredMiddleware } = yield* AuthMiddleware;
     const apiOnly =
-      (yield* ccvOptionsService.getCcvOptions("apiOnly")) === true;
+      (yield* bbcvOptionsService.getBbcvOptions("apiOnly")) === true;
     const apiOnlyMiddleware = createApiOnlyMiddleware(apiOnly);
 
     const runtime = yield* getHonoRuntime;

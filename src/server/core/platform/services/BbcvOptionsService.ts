@@ -6,19 +6,19 @@ export type CliOptions = {
   hostname: string;
   password?: string | undefined;
   executable?: string | undefined;
-  claudeDir?: string | undefined;
+  blackboxDir?: string | undefined;
   terminalDisabled?: boolean | undefined;
   terminalShell?: string | undefined;
   terminalUnrestricted?: boolean | undefined;
   apiOnly?: boolean | undefined;
 };
 
-export type CcvOptions = {
+export type BbcvOptions = {
   port: number;
   hostname: string;
   password?: string | undefined;
   executable?: string | undefined;
-  claudeDir?: string | undefined;
+  blackboxDir?: string | undefined;
   terminalDisabled?: boolean | undefined;
   terminalShell?: string | undefined;
   terminalUnrestricted?: boolean | undefined;
@@ -36,11 +36,11 @@ const isFlagEnabled = (value: string | undefined) => {
 };
 
 const LayerImpl = Effect.gen(function* () {
-  const ccvOptionsRef = yield* Ref.make<CcvOptions | undefined>(undefined);
+  const bbcvOptionsRef = yield* Ref.make<BbcvOptions | undefined>(undefined);
 
   const loadCliOptions = (cliOptions: CliOptions) => {
     return Effect.gen(function* () {
-      yield* Ref.update(ccvOptionsRef, () => {
+      yield* Ref.update(bbcvOptionsRef, () => {
         return {
           port: Number.parseInt(
             cliOptions.port ?? getOptionalEnv("PORT") ?? "3000",
@@ -49,56 +49,56 @@ const LayerImpl = Effect.gen(function* () {
           hostname:
             cliOptions.hostname ?? getOptionalEnv("HOSTNAME") ?? "localhost",
           password:
-            cliOptions.password ?? getOptionalEnv("CCV_PASSWORD") ?? undefined,
+            cliOptions.password ?? getOptionalEnv("BBCV_PASSWORD") ?? undefined,
           executable:
             cliOptions.executable ??
-            getOptionalEnv("CCV_CC_EXECUTABLE_PATH") ??
+            getOptionalEnv("BBCV_BB_EXECUTABLE_PATH") ??
             undefined,
-          claudeDir:
-            cliOptions.claudeDir ?? getOptionalEnv("CCV_GLOBAL_CLAUDE_DIR"),
+          blackboxDir:
+            cliOptions.blackboxDir ?? getOptionalEnv("BBCV_GLOBAL_BLACKBOX_DIR"),
           terminalDisabled:
             cliOptions.terminalDisabled ??
-            (isFlagEnabled(getOptionalEnv("CCV_TERMINAL_DISABLED"))
+            (isFlagEnabled(getOptionalEnv("BBCV_TERMINAL_DISABLED"))
               ? true
               : undefined),
           terminalShell:
             cliOptions.terminalShell ??
-            getOptionalEnv("CCV_TERMINAL_SHELL") ??
+            getOptionalEnv("BBCV_TERMINAL_SHELL") ??
             undefined,
           terminalUnrestricted:
             cliOptions.terminalUnrestricted ??
-            (isFlagEnabled(getOptionalEnv("CCV_TERMINAL_UNRESTRICTED"))
+            (isFlagEnabled(getOptionalEnv("BBCV_TERMINAL_UNRESTRICTED"))
               ? true
               : undefined),
           apiOnly:
             cliOptions.apiOnly ??
-            (isFlagEnabled(getOptionalEnv("CCV_API_ONLY")) ? true : undefined),
+            (isFlagEnabled(getOptionalEnv("BBCV_API_ONLY")) ? true : undefined),
         };
       });
     });
   };
 
-  const getCcvOptions = <K extends keyof CcvOptions>(key: K) => {
+  const getBbcvOptions = <K extends keyof BbcvOptions>(key: K) => {
     return Effect.gen(function* () {
-      const ccvOptions = yield* Ref.get(ccvOptionsRef);
-      if (ccvOptions === undefined) {
-        throw new Error("Unexpected error: CCV options are not loaded");
+      const bbcvOptions = yield* Ref.get(bbcvOptionsRef);
+      if (bbcvOptions === undefined) {
+        throw new Error("Unexpected error: BBCV options are not loaded");
       }
-      return ccvOptions[key];
+      return bbcvOptions[key];
     });
   };
 
   return {
     loadCliOptions,
-    getCcvOptions,
+    getBbcvOptions,
   };
 });
 
-export type ICcvOptionsService = InferEffect<typeof LayerImpl>;
+export type IBbcvOptionsService = InferEffect<typeof LayerImpl>;
 
-export class CcvOptionsService extends Context.Tag("CcvOptionsService")<
-  CcvOptionsService,
-  ICcvOptionsService
+export class BbcvOptionsService extends Context.Tag("BbcvOptionsService")<
+  BbcvOptionsService,
+  IBbcvOptionsService
 >() {
   static Live = Layer.effect(this, LayerImpl);
 }

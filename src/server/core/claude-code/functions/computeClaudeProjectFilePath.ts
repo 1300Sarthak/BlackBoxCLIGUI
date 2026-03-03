@@ -3,14 +3,14 @@ import { Effect } from "effect";
 
 export const computeClaudeProjectFilePath = (options: {
   projectPath: string;
-  claudeProjectsDirPath: string;
+  blackboxProjectsDirPath: string;
 }) =>
   Effect.gen(function* () {
     const path = yield* Path.Path;
-    const { projectPath, claudeProjectsDirPath } = options;
+    const { projectPath, blackboxProjectsDirPath } = options;
 
     return path.join(
-      claudeProjectsDirPath,
+      blackboxProjectsDirPath,
       projectPath.replace(/\/$/, "").replace(/\//g, "-"),
     );
   });

@@ -6,6 +6,6 @@ if [ -d "dist" ]; then
   rm -rf dist
 fi
 
-pnpm lingui:compile
-pnpm build:frontend
-pnpm build:backend
+npm run lingui:compile
+npm run build:frontend
+npm run build:backend

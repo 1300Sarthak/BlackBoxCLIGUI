@@ -60,19 +60,19 @@ const LayerImpl = Effect.gen(function* () {
 
   const buildIndex = () =>
     Effect.gen(function* () {
-      const { claudeProjectsDirPath } = yield* context.claudeCodePaths;
+      const { blackboxProjectsDirPath } = yield* context.blackboxCliPaths;
 
-      const dirExists = yield* fs.exists(claudeProjectsDirPath);
+      const dirExists = yield* fs.exists(blackboxProjectsDirPath);
       if (!dirExists) {
         return { index: createMiniSearchIndex(), documents: new Map() };
       }
 
-      const projectEntries = yield* fs.readDirectory(claudeProjectsDirPath);
+      const projectEntries = yield* fs.readDirectory(blackboxProjectsDirPath);
       const miniSearch = createMiniSearchIndex();
 
       const documentEffects = projectEntries.map((projectEntry) =>
         Effect.gen(function* () {
-          const projectPath = path.resolve(claudeProjectsDirPath, projectEntry);
+          const projectPath = path.resolve(blackboxProjectsDirPath, projectEntry);
           const stat = yield* fs
             .stat(projectPath)
             .pipe(Effect.catchAll(() => Effect.succeed(null)));
@@ -182,9 +182,9 @@ const LayerImpl = Effect.gen(function* () {
 
   const search = (query: string, limit = 20, projectId?: string) =>
     Effect.gen(function* () {
-      const { claudeProjectsDirPath } = yield* context.claudeCodePaths;
+      const { blackboxProjectsDirPath } = yield* context.blackboxCliPaths;
 
-      const dirExists = yield* fs.exists(claudeProjectsDirPath);
+      const dirExists = yield* fs.exists(blackboxProjectsDirPath);
       if (!dirExists) {
         return { results: [] as SearchResult[] };
       }

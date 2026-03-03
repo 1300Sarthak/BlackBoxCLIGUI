@@ -6,12 +6,12 @@ import { EventBus } from "../../server/core/events/services/EventBus";
 import type { EnvSchema } from "../../server/core/platform/schema";
 import {
   ApplicationContext,
-  type ClaudeCodePaths,
+  type BlackboxCliPaths,
 } from "../../server/core/platform/services/ApplicationContext";
 import {
-  type CcvOptions,
-  CcvOptionsService,
-} from "../../server/core/platform/services/CcvOptionsService";
+  type BbcvOptions,
+  BbcvOptionsService,
+} from "../../server/core/platform/services/BbcvOptionsService";
 import { EnvService } from "../../server/core/platform/services/EnvService";
 import { UserConfigService } from "../../server/core/platform/services/UserConfigService";
 import type { UserConfig } from "../../server/lib/config/config";
@@ -19,25 +19,25 @@ import type { UserConfig } from "../../server/lib/config/config";
 const claudeDirForTest = resolve(process.cwd(), "mock-global-claude-dir");
 
 export const testPlatformLayer = (overrides?: {
-  claudeCodePaths?: Partial<ClaudeCodePaths>;
+  blackboxCliPaths?: Partial<BlackboxCliPaths>;
   env?: Partial<EnvSchema>;
   userConfig?: Partial<UserConfig>;
-  ccvOptions?: Partial<CcvOptions>;
+  bbcvOptions?: Partial<BbcvOptions>;
 }) => {
   const applicationContextLayer = Layer.mock(ApplicationContext, {
-    claudeCodePaths: Effect.succeed({
-      globalClaudeDirectoryPath: resolve(claudeDirForTest),
-      claudeCommandsDirPath: resolve(claudeDirForTest, "commands"),
-      claudeSkillsDirPath: resolve(claudeDirForTest, "skills"),
-      claudeProjectsDirPath: resolve(claudeDirForTest, "projects"),
-      ...overrides?.claudeCodePaths,
+    blackboxCliPaths: Effect.succeed({
+      globalBlackboxDirectoryPath: resolve(claudeDirForTest),
+      blackboxCommandsDirPath: resolve(claudeDirForTest, "commands"),
+      blackboxSkillsDirPath: resolve(claudeDirForTest, "skills"),
+      blackboxProjectsDirPath: resolve(claudeDirForTest, "projects"),
+      ...overrides?.blackboxCliPaths,
     }),
   });
 
-  const ccvOptionsServiceLayer = Layer.mock(CcvOptionsService, {
-    getCcvOptions: <Key extends keyof CcvOptions>(key: Key) =>
-      Effect.sync((): CcvOptions[Key] => {
-        return overrides?.ccvOptions?.[key] as CcvOptions[Key];
+  const bbcvOptionsServiceLayer = Layer.mock(BbcvOptionsService, {
+    getBbcvOptions: <Key extends keyof BbcvOptions>(key: Key) =>
+      Effect.sync((): BbcvOptions[Key] => {
+        return overrides?.bbcvOptions?.[key] as BbcvOptions[Key];
       }),
   });
 
@@ -45,8 +45,8 @@ export const testPlatformLayer = (overrides?: {
     getEnv: <Key extends keyof EnvSchema>(key: Key) =>
       Effect.sync(() => {
         switch (key) {
-          case "CCV_ENV":
-            return overrides?.env?.CCV_ENV ?? "development";
+          case "BBCV_ENV":
+            return overrides?.env?.BBCV_ENV ?? "development";
           case "NEXT_PHASE":
             return overrides?.env?.NEXT_PHASE ?? "phase-test";
           default:
@@ -78,7 +78,7 @@ export const testPlatformLayer = (overrides?: {
     applicationContextLayer,
     userConfigServiceLayer,
     EventBus.Live,
-    ccvOptionsServiceLayer,
+    bbcvOptionsServiceLayer,
     envServiceLayer,
     Path.layer,
   );

@@ -1,14 +1,14 @@
 import { Effect } from "effect";
 import { Hono } from "hono";
 import { describe, expect, it } from "vitest";
-import { CcvOptionsService } from "../../core/platform/services/CcvOptionsService";
+import { BbcvOptionsService } from "../../core/platform/services/BbcvOptionsService";
 import type { HonoContext } from "../app";
 import { AuthMiddleware } from "./auth.middleware";
 
 const createTestApp = (password?: string) =>
   Effect.gen(function* () {
-    const ccvOptionsService = yield* CcvOptionsService;
-    yield* ccvOptionsService.loadCliOptions({
+    const bbcvOptionsService = yield* BbcvOptionsService;
+    yield* bbcvOptionsService.loadCliOptions({
       port: "3000",
       hostname: "localhost",
       password,
@@ -33,7 +33,7 @@ describe("auth required middleware", () => {
     const { app, validSessionToken } = await Effect.runPromise(
       createTestApp("secret").pipe(
         Effect.provide(AuthMiddleware.Live),
-        Effect.provide(CcvOptionsService.Live),
+        Effect.provide(BbcvOptionsService.Live),
       ),
     );
 
@@ -52,7 +52,7 @@ describe("auth required middleware", () => {
     const { app } = await Effect.runPromise(
       createTestApp("secret").pipe(
         Effect.provide(AuthMiddleware.Live),
-        Effect.provide(CcvOptionsService.Live),
+        Effect.provide(BbcvOptionsService.Live),
       ),
     );
 
@@ -75,7 +75,7 @@ describe("auth required middleware", () => {
     const { app } = await Effect.runPromise(
       createTestApp("secret").pipe(
         Effect.provide(AuthMiddleware.Live),
-        Effect.provide(CcvOptionsService.Live),
+        Effect.provide(BbcvOptionsService.Live),
       ),
     );
 
@@ -87,7 +87,7 @@ describe("auth required middleware", () => {
     const { app } = await Effect.runPromise(
       createTestApp(undefined).pipe(
         Effect.provide(AuthMiddleware.Live),
-        Effect.provide(CcvOptionsService.Live),
+        Effect.provide(BbcvOptionsService.Live),
       ),
     );
 

@@ -1,8 +1,8 @@
 import { homedir } from "node:os";
 import { resolve } from "node:path";
 
-export const claudeCodeViewerCacheDirPath = resolve(
+export const blackboxCliViewerCacheDirPath = resolve(
   homedir(),
-  ".claude-code-viewer",
+  ".blackbox-cli-viewer",
   "cache",
 );

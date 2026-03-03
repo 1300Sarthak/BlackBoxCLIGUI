@@ -20,7 +20,7 @@ import { FileSystemController } from "./core/file-system/presentation/FileSystem
 import { GitController } from "./core/git/presentation/GitController";
 import { GitService } from "./core/git/services/GitService";
 import { isDevelopmentEnv } from "./core/platform/ccvEnv";
-import type { CliOptions } from "./core/platform/services/CcvOptionsService";
+import type { CliOptions } from "./core/platform/services/BbcvOptionsService";
 import { ProjectRepository } from "./core/project/infrastructure/ProjectRepository";
 import { ProjectController } from "./core/project/presentation/ProjectController";
 import { ProjectMetaService } from "./core/project/services/ProjectMetaService";
@@ -46,7 +46,7 @@ import { setupTerminalWebSocket } from "./terminal/terminalWebSocket";
 
 export const startServer = async (options: CliOptions) => {
   // biome-ignore lint/style/noProcessEnv: allow only here
-  const isDevelopment = isDevelopmentEnv(process.env.CCV_ENV);
+  const isDevelopment = isDevelopmentEnv(process.env.BBCV_ENV);
   const apiOnly = options.apiOnly === true;
 
   if (!isDevelopment && !apiOnly) {

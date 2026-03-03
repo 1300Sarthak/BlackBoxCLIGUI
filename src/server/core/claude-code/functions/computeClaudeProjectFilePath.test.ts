@@ -15,7 +15,7 @@ describe("computeClaudeProjectFilePath", () => {
     const result = await Effect.runPromise(
       computeClaudeProjectFilePath({
         projectPath,
-        claudeProjectsDirPath: TEST_PROJECTS_DIR,
+        blackboxProjectsDirPath: TEST_PROJECTS_DIR,
       }).pipe(Effect.provide(Path.layer)),
     );
 
@@ -29,7 +29,7 @@ describe("computeClaudeProjectFilePath", () => {
     const result = await Effect.runPromise(
       computeClaudeProjectFilePath({
         projectPath,
-        claudeProjectsDirPath: TEST_PROJECTS_DIR,
+        blackboxProjectsDirPath: TEST_PROJECTS_DIR,
       }).pipe(Effect.provide(Path.layer)),
     );
 
