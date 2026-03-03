@@ -196,7 +196,7 @@ const SessionPageMainContent: FC<
 
   const abortTask = useMutation({
     mutationFn: async (sessionProcessId: string) => {
-      const response = await honoClient.api["claude-code"]["session-processes"][
+      const response = await honoClient.api["blackbox-cli"]["session-processes"][
         ":sessionProcessId"
       ].abort.$post({
         param: { sessionProcessId },

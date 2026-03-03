@@ -110,9 +110,9 @@ const LayerImpl = Effect.gen(function* () {
           type: "resume";
           sessionId: string;
         };
-    ccOptions?: CCTurn.CCOptions;
+    bbOptions?: CCTurn.CCOptions;
   }) => {
-    const { projectId, cwd, input, userConfig, baseSession, ccOptions } =
+    const { projectId, cwd, input, userConfig, baseSession, bbOptions } =
       options;
 
     return Effect.gen(function* () {
@@ -136,7 +136,7 @@ const LayerImpl = Effect.gen(function* () {
               ? {
                   type: "new",
                   turnId: ulid(),
-                  ccOptions,
+                  bbOptions,
                 }
               : baseSession.type === "fork"
                 ? {
@@ -144,14 +144,14 @@ const LayerImpl = Effect.gen(function* () {
                     turnId: ulid(),
                     sessionId: baseSession.sessionId,
                     baseSessionId: baseSession.sessionId,
-                    ccOptions,
+                    bbOptions,
                   }
                 : {
                     type: "resume",
                     turnId: ulid(),
                     sessionId: undefined,
                     baseSessionId: baseSession.sessionId,
-                    ccOptions,
+                    bbOptions,
                   },
         });
 
@@ -314,7 +314,7 @@ const LayerImpl = Effect.gen(function* () {
               });
 
             return yield* ClaudeCode.query(generateMessages(), {
-              ...(task.def.type === "continue" ? {} : task.def.ccOptions),
+              ...(task.def.type === "continue" ? {} : task.def.bbOptions),
               ...permissionOptions,
               resume: task.def.baseSessionId,
               cwd: sessionProcess.def.cwd,

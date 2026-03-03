@@ -46,10 +46,10 @@ const LayerImpl = Effect.gen(function* () {
           type: "resume";
           sessionId: string;
         };
-    ccOptions?: CCTurn.CCOptions;
+    bbOptions?: CCTurn.CCOptions;
   }) =>
     Effect.gen(function* () {
-      const { projectId, input, baseSession, ccOptions } = options;
+      const { projectId, input, baseSession, bbOptions } = options;
 
       const { project } = yield* projectRepository.getProject(projectId);
       const userConfig = yield* userConfigService.getUserConfig();
@@ -67,7 +67,7 @@ const LayerImpl = Effect.gen(function* () {
         baseSession,
         userConfig,
         input,
-        ccOptions,
+        bbOptions,
       });
 
       const { sessionId } = yield* result.yieldSessionInitialized();

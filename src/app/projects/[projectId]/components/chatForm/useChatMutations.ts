@@ -14,7 +14,7 @@ export const useCreateSessionProcessMutation = (
       input: MessageInput;
       baseSessionId?: string;
     }) => {
-      const { ccOptions, forkSession, ...input } = options.input;
+      const { bbOptions, forkSession, ...input } = options.input;
 
       const getBaseSession = ():
         | undefined
@@ -25,7 +25,7 @@ export const useCreateSessionProcessMutation = (
         return { type: sessionType, sessionId: options.baseSessionId };
       };
 
-      const response = await honoClient.api["claude-code"][
+      const response = await honoClient.api["blackbox-cli"][
         "session-processes"
       ].$post(
         {
@@ -33,7 +33,7 @@ export const useCreateSessionProcessMutation = (
             projectId,
             baseSession: getBaseSession(),
             input,
-            ccOptions,
+            bbOptions,
           },
         },
         {
@@ -74,7 +74,7 @@ export const useContinueSessionProcessMutation = (
       input: MessageInput;
       sessionProcessId: string;
     }) => {
-      const response = await honoClient.api["claude-code"]["session-processes"][
+      const response = await honoClient.api["blackbox-cli"]["session-processes"][
         ":sessionProcessId"
       ].continue.$post(
         {

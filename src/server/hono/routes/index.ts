@@ -17,7 +17,7 @@ import { AuthMiddleware } from "../middleware/auth.middleware";
 import { configMiddleware } from "../middleware/config.middleware";
 import { getHonoRuntime } from "../runtime";
 import { authRoutes } from "./authRoutes";
-import { claudeCodeRoutes } from "./claudeCodeRoutes";
+import { blackboxCliRoutes } from "./blackboxCliRoutes";
 import { featureFlagRoutes } from "./featureFlagRoutes";
 import { fileSystemRoutes } from "./fileSystemRoutes";
 import { projectRoutes } from "./projectRoutes";
@@ -30,7 +30,7 @@ const API_ONLY_ALLOWED_PREFIXES = [
   "/api/version",
   "/api/config",
   "/api/projects",
-  "/api/claude-code",
+  "/api/blackbox-cli",
   "/api/search",
   "/api/sse",
 ];
@@ -122,7 +122,7 @@ export const routes = (app: HonoAppType, options: CliOptions) =>
 
         // core routes
         .route("/api/projects", yield* projectRoutes)
-        .route("/api/claude-code", yield* claudeCodeRoutes)
+        .route("/api/blackbox-cli", yield* blackboxCliRoutes)
         .route("/api/scheduler", yield* schedulerRoutes)
         .route("/api/file-system", yield* fileSystemRoutes)
         .route("/api/search", yield* searchRoutes)

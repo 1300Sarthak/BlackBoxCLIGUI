@@ -17,11 +17,11 @@ import { Textarea } from "@/components/ui/textarea";
 import type { CCOptionsSchema } from "@/server/core/claude-code/schema";
 import {
   type CCOptionsForm,
-  ccOptionsFormSchema,
+  bbOptionsFormSchema,
   hasNonDefaultCCOptions,
   transformFormToSchema,
   transformSchemaToForm,
-} from "./ccOptionsFormSchema";
+} from "./bbOptionsFormSchema";
 
 type ClaudeCodeSettingsFormProps = {
   value: CCOptionsSchema | undefined;
@@ -246,7 +246,7 @@ export const ClaudeCodeSettingsForm: FC<ClaudeCodeSettingsFormProps> = ({
     setValue,
     formState: { errors },
   } = useForm<CCOptionsForm>({
-    resolver: zodResolver(ccOptionsFormSchema),
+    resolver: zodResolver(bbOptionsFormSchema),
     defaultValues: transformSchemaToForm(value),
   });
 
