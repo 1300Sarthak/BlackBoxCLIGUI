@@ -2,7 +2,7 @@ import { Context, Effect, Layer } from "effect";
 import { ulid } from "ulid";
 import type WebSocket from "ws";
 import type { InferEffect } from "../../lib/effect/types";
-import { CcvOptionsService } from "../platform/services/CcvOptionsService";
+import { BbcvOptionsService } from "../platform/services/BbcvOptionsService";
 import { EnvService } from "../platform/services/EnvService";
 import { normalizePtyChunk } from "./normalizePtyChunk";
 import {
@@ -59,7 +59,7 @@ const isFlagEnabled = (value: string | undefined) => {
 
 const LayerImpl = Effect.gen(function* () {
   const envService = yield* EnvService;
-  const ccvOptionsService = yield* CcvOptionsService;
+  const bbcvOptionsService = yield* BbcvOptionsService;
   const sessions = new Map<string, TerminalSession>();
 
   const disabledService = (reason: string) => {
@@ -224,30 +224,30 @@ const LayerImpl = Effect.gen(function* () {
   ) =>
     Effect.gen(function* () {
       const terminalDisabledEnv = yield* envService.getEnv(
-        "CCV_TERMINAL_DISABLED",
+        "BBCV_TERMINAL_DISABLED",
       );
       const terminalDisabledOption =
-        yield* ccvOptionsService.getCcvOptions("terminalDisabled");
+        yield* bbcvOptionsService.getBbcvOptions("terminalDisabled");
       const terminalDisabled =
         terminalDisabledOption ?? isFlagEnabled(terminalDisabledEnv);
       if (terminalDisabled) {
         return yield* Effect.fail(
           new Error(
-            "Terminal support is unavailable (CCV_TERMINAL_DISABLED is enabled).",
+            "Terminal support is unavailable (BBCV_TERMINAL_DISABLED is enabled).",
           ),
         );
       }
       const cwd = cwdOverride ?? process.cwd();
       const terminalShellOption =
-        yield* ccvOptionsService.getCcvOptions("terminalShell");
+        yield* bbcvOptionsService.getBbcvOptions("terminalShell");
       const shell =
-        terminalShellOption ?? (yield* envService.getEnv("CCV_TERMINAL_SHELL"));
+        terminalShellOption ?? (yield* envService.getEnv("BBCV_TERMINAL_SHELL"));
       const fallbackShell = yield* envService.getEnv("SHELL");
-      const terminalUnrestrictedOption = yield* ccvOptionsService.getCcvOptions(
+      const terminalUnrestrictedOption = yield* bbcvOptionsService.getBbcvOptions(
         "terminalUnrestricted",
       );
       const terminalUnrestrictedEnv = yield* envService.getEnv(
-        "CCV_TERMINAL_UNRESTRICTED",
+        "BBCV_TERMINAL_UNRESTRICTED",
       );
       const unrestrictedFlag =
         terminalUnrestrictedOption ?? isFlagEnabled(terminalUnrestrictedEnv);

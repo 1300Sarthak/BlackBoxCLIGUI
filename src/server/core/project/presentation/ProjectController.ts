@@ -129,8 +129,8 @@ const LayerImpl = Effect.gen(function* () {
       // if it doesn't exist when running /init command
       const claudeProjectFilePath = yield* computeClaudeProjectFilePath({
         projectPath,
-        claudeProjectsDirPath: (yield* context.claudeCodePaths)
-          .claudeProjectsDirPath,
+        blackboxProjectsDirPath: (yield* context.blackboxCliPaths)
+          .blackboxProjectsDirPath,
       });
       const projectId = encodeProjectId(claudeProjectFilePath);
       const userConfig = yield* userConfigService.getUserConfig();

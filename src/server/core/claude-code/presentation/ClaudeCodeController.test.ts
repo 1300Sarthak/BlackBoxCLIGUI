@@ -109,11 +109,11 @@ describe("ClaudeCodeController.getClaudeCommands", () => {
     const appContextLayer = Layer.succeed(
       ApplicationContext,
       ApplicationContext.of({
-        claudeCodePaths: Effect.succeed({
-          globalClaudeDirectoryPath: testDir,
-          claudeCommandsDirPath: globalCommandsDir,
-          claudeSkillsDirPath: `${testDir}/skills`,
-          claudeProjectsDirPath: `${testDir}/projects`,
+        blackboxCliPaths: Effect.succeed({
+          globalBlackboxDirectoryPath: testDir,
+          blackboxCommandsDirPath: globalCommandsDir,
+          blackboxSkillsDirPath: `${testDir}/skills`,
+          blackboxProjectsDirPath: `${testDir}/projects`,
         }),
       }),
     );
@@ -211,11 +211,11 @@ describe("ClaudeCodeController.getClaudeCommands", () => {
     const appContextLayer = Layer.succeed(
       ApplicationContext,
       ApplicationContext.of({
-        claudeCodePaths: Effect.succeed({
-          globalClaudeDirectoryPath: testDir,
-          claudeCommandsDirPath: globalCommandsDir,
-          claudeSkillsDirPath: `${testDir}/skills`,
-          claudeProjectsDirPath: `${testDir}/projects`,
+        blackboxCliPaths: Effect.succeed({
+          globalBlackboxDirectoryPath: testDir,
+          blackboxCommandsDirPath: globalCommandsDir,
+          blackboxSkillsDirPath: `${testDir}/skills`,
+          blackboxProjectsDirPath: `${testDir}/projects`,
         }),
       }),
     );
@@ -291,11 +291,11 @@ describe("ClaudeCodeController.getClaudeCommands", () => {
     const appContextLayer = Layer.succeed(
       ApplicationContext,
       ApplicationContext.of({
-        claudeCodePaths: Effect.succeed({
-          globalClaudeDirectoryPath: testDir,
-          claudeCommandsDirPath: globalCommandsDir,
-          claudeSkillsDirPath: `${testDir}/skills`,
-          claudeProjectsDirPath: `${testDir}/projects`,
+        blackboxCliPaths: Effect.succeed({
+          globalBlackboxDirectoryPath: testDir,
+          blackboxCommandsDirPath: globalCommandsDir,
+          blackboxSkillsDirPath: `${testDir}/skills`,
+          blackboxProjectsDirPath: `${testDir}/projects`,
         }),
       }),
     );
@@ -350,11 +350,11 @@ describe("ClaudeCodeController.getClaudeCommands", () => {
     const appContextLayer = Layer.succeed(
       ApplicationContext,
       ApplicationContext.of({
-        claudeCodePaths: Effect.succeed({
-          globalClaudeDirectoryPath: testDir,
-          claudeCommandsDirPath: `${testDir}/non-existent`,
-          claudeSkillsDirPath: `${testDir}/skills`,
-          claudeProjectsDirPath: `${testDir}/projects`,
+        blackboxCliPaths: Effect.succeed({
+          globalBlackboxDirectoryPath: testDir,
+          blackboxCommandsDirPath: `${testDir}/non-existent`,
+          blackboxSkillsDirPath: `${testDir}/skills`,
+          blackboxProjectsDirPath: `${testDir}/projects`,
         }),
       }),
     );
@@ -417,11 +417,11 @@ describe("ClaudeCodeController.getClaudeCommands", () => {
     const appContextLayer = Layer.succeed(
       ApplicationContext,
       ApplicationContext.of({
-        claudeCodePaths: Effect.succeed({
-          globalClaudeDirectoryPath: testDir,
-          claudeCommandsDirPath: globalCommandsDir,
-          claudeSkillsDirPath: `${testDir}/skills`,
-          claudeProjectsDirPath: `${testDir}/projects`,
+        blackboxCliPaths: Effect.succeed({
+          globalBlackboxDirectoryPath: testDir,
+          blackboxCommandsDirPath: globalCommandsDir,
+          blackboxSkillsDirPath: `${testDir}/skills`,
+          blackboxProjectsDirPath: `${testDir}/projects`,
         }),
       }),
     );
@@ -501,11 +501,11 @@ describe("ClaudeCodeController.getClaudeCommands", () => {
     const appContextLayer = Layer.succeed(
       ApplicationContext,
       ApplicationContext.of({
-        claudeCodePaths: Effect.succeed({
-          globalClaudeDirectoryPath: testDir,
-          claudeCommandsDirPath: globalCommandsDir,
-          claudeSkillsDirPath: `${testDir}/skills`,
-          claudeProjectsDirPath: `${testDir}/projects`,
+        blackboxCliPaths: Effect.succeed({
+          globalBlackboxDirectoryPath: testDir,
+          blackboxCommandsDirPath: globalCommandsDir,
+          blackboxSkillsDirPath: `${testDir}/skills`,
+          blackboxProjectsDirPath: `${testDir}/projects`,
         }),
       }),
     );
@@ -619,11 +619,11 @@ describe("ClaudeCodeController.getClaudeCommands", () => {
     const appContextLayer = Layer.succeed(
       ApplicationContext,
       ApplicationContext.of({
-        claudeCodePaths: Effect.succeed({
-          globalClaudeDirectoryPath: testDir,
-          claudeCommandsDirPath: globalCommandsDir,
-          claudeSkillsDirPath: globalSkillsDir,
-          claudeProjectsDirPath: `${testDir}/projects`,
+        blackboxCliPaths: Effect.succeed({
+          globalBlackboxDirectoryPath: testDir,
+          blackboxCommandsDirPath: globalCommandsDir,
+          blackboxSkillsDirPath: globalSkillsDir,
+          blackboxProjectsDirPath: `${testDir}/projects`,
         }),
       }),
     );

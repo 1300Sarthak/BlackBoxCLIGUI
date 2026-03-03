@@ -2,46 +2,46 @@ import { homedir } from "node:os";
 import { Path } from "@effect/platform";
 import { Effect, Context as EffectContext, Layer } from "effect";
 import type { InferEffect } from "../../../lib/effect/types";
-import { CcvOptionsService } from "./CcvOptionsService";
+import { BbcvOptionsService } from "./BbcvOptionsService";
 
-export type ClaudeCodePaths = {
-  globalClaudeDirectoryPath: string;
-  claudeCommandsDirPath: string;
-  claudeSkillsDirPath: string;
-  claudeProjectsDirPath: string;
+export type BlackboxCliPaths = {
+  globalBlackboxDirectoryPath: string;
+  blackboxCommandsDirPath: string;
+  blackboxSkillsDirPath: string;
+  blackboxProjectsDirPath: string;
 };
 
 const LayerImpl = Effect.gen(function* () {
   const path = yield* Path.Path;
-  const ccvOptionsService = yield* CcvOptionsService;
+  const bbcvOptionsService = yield* BbcvOptionsService;
 
-  const claudeCodePaths = Effect.gen(function* () {
-    const globalClaudeDirectoryPath = yield* ccvOptionsService
-      .getCcvOptions("claudeDir")
+  const blackboxCliPaths = Effect.gen(function* () {
+    const globalBlackboxDirectoryPath = yield* bbcvOptionsService
+      .getBbcvOptions("blackboxDir")
       .pipe(
         Effect.map((envVar) =>
           envVar === undefined
-            ? path.resolve(homedir(), ".claude")
+            ? path.resolve(homedir(), ".blackboxcli")
             : path.resolve(envVar),
         ),
       );
 
     return {
-      globalClaudeDirectoryPath,
-      claudeCommandsDirPath: path.resolve(
-        globalClaudeDirectoryPath,
+      globalBlackboxDirectoryPath,
+      blackboxCommandsDirPath: path.resolve(
+        globalBlackboxDirectoryPath,
         "commands",
       ),
-      claudeSkillsDirPath: path.resolve(globalClaudeDirectoryPath, "skills"),
-      claudeProjectsDirPath: path.resolve(
-        globalClaudeDirectoryPath,
+      blackboxSkillsDirPath: path.resolve(globalBlackboxDirectoryPath, "skills"),
+      blackboxProjectsDirPath: path.resolve(
+        globalBlackboxDirectoryPath,
         "projects",
       ),
-    } as const satisfies ClaudeCodePaths;
+    } as const satisfies BlackboxCliPaths;
   });
 
   return {
-    claudeCodePaths,
+    blackboxCliPaths,
   };
 });
 

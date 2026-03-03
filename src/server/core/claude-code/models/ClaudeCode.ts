@@ -2,7 +2,7 @@ import * as agentSdk from "@anthropic-ai/claude-agent-sdk";
 import { Command, Path } from "@effect/platform";
 import { Data, Effect } from "effect";
 import { uniq } from "es-toolkit";
-import { CcvOptionsService } from "../../platform/services/CcvOptionsService";
+import { BbcvOptionsService } from "../../platform/services/BbcvOptionsService";
 import * as ClaudeCodeVersion from "./ClaudeCodeVersion";
 
 type AgentSdkQuery = typeof agentSdk.query;
@@ -42,11 +42,11 @@ class ClaudeCodeAgentSdkNotSupportedError extends Data.TaggedError(
 
 const resolveClaudeCodePath = Effect.gen(function* () {
   const path = yield* Path.Path;
-  const ccvOptionsService = yield* CcvOptionsService;
+  const bbcvOptionsService = yield* BbcvOptionsService;
 
   // Environment variable (highest priority)
   const specifiedExecutablePath =
-    yield* ccvOptionsService.getCcvOptions("executable");
+    yield* bbcvOptionsService.getBbcvOptions("executable");
   if (specifiedExecutablePath !== undefined) {
     return path.resolve(specifiedExecutablePath);
   }

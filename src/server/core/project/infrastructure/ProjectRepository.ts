@@ -42,25 +42,25 @@ const LayerImpl = Effect.gen(function* () {
     Effect.gen(function* () {
       // Check if the claude projects directory exists
       const dirExists = yield* fs.exists(
-        (yield* context.claudeCodePaths).claudeProjectsDirPath,
+        (yield* context.blackboxCliPaths).blackboxProjectsDirPath,
       );
       if (!dirExists) {
         console.warn(
-          `Claude projects directory not found at ${(yield* context.claudeCodePaths).claudeProjectsDirPath}`,
+          `Claude projects directory not found at ${(yield* context.blackboxCliPaths).blackboxProjectsDirPath}`,
         );
         return { projects: [] };
       }
 
       // Read directory entries
       const entries = yield* fs.readDirectory(
-        (yield* context.claudeCodePaths).claudeProjectsDirPath,
+        (yield* context.blackboxCliPaths).blackboxProjectsDirPath,
       );
 
       // Filter directories and map to Project objects
       const projectEffects = entries.map((entry) =>
         Effect.gen(function* () {
           const fullPath = path.resolve(
-            (yield* context.claudeCodePaths).claudeProjectsDirPath,
+            (yield* context.blackboxCliPaths).blackboxProjectsDirPath,
             entry,
           );
 

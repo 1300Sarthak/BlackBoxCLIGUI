@@ -13,7 +13,7 @@ describe("DeprecatedEnvDetector", () => {
     // biome-ignore lint/style/noProcessEnv: Testing environment variable detection
     delete process.env.CLAUDE_CODE_VIEWER_CC_EXECUTABLE_PATH;
     // biome-ignore lint/style/noProcessEnv: Testing environment variable detection
-    delete process.env.CCV_PASSWORD;
+    delete process.env.BBCV_PASSWORD;
   });
 
   it("should not show warnings when no deprecated env vars are set", async () => {
@@ -21,7 +21,7 @@ describe("DeprecatedEnvDetector", () => {
 
     // Set only valid env vars
     // biome-ignore lint/style/noProcessEnv: Testing environment variable detection
-    process.env.CCV_PASSWORD = "test";
+    process.env.BBCV_PASSWORD = "test";
 
     // Dynamically import after env vars are set
     const { checkDeprecatedEnvs } = await import("./DeprecatedEnvDetector");
@@ -31,7 +31,7 @@ describe("DeprecatedEnvDetector", () => {
     expect(consoleSpy).not.toHaveBeenCalled();
 
     // biome-ignore lint/style/noProcessEnv: Testing environment variable detection
-    delete process.env.CCV_PASSWORD;
+    delete process.env.BBCV_PASSWORD;
   });
 
   it("should show warning and throw error for removed CLAUDE_CODE_VIEWER_AUTH_PASSWORD", async () => {
@@ -51,7 +51,7 @@ describe("DeprecatedEnvDetector", () => {
     const output = consoleSpy.mock.calls.flat().join("\n");
     expect(output).toContain("REMOVED");
     expect(output).toContain("CLAUDE_CODE_VIEWER_AUTH_PASSWORD");
-    expect(output).toContain("CCV_PASSWORD");
+    expect(output).toContain("BBCV_PASSWORD");
     expect(output).toContain("--password");
 
     // biome-ignore lint/style/noProcessEnv: Testing environment variable detection
@@ -75,7 +75,7 @@ describe("DeprecatedEnvDetector", () => {
     const output = consoleSpy.mock.calls.flat().join("\n");
     expect(output).toContain("REMOVED");
     expect(output).toContain("CLAUDE_CODE_VIEWER_CC_EXECUTABLE_PATH");
-    expect(output).toContain("CCV_CC_EXECUTABLE_PATH");
+    expect(output).toContain("BBCV_CC_EXECUTABLE_PATH");
     expect(output).toContain("--executable");
 
     // biome-ignore lint/style/noProcessEnv: Testing environment variable detection

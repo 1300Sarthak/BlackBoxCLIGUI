@@ -1,14 +1,14 @@
 {
-  "name": "@kimuson/claude-code-viewer",
-  "version": "0.6.0",
-  "description": "A full-featured web-based Claude Code client that provides complete interactive functionality for managing Claude Code projects.",
+  "name": "@sarthak/blackbox-cli-viewer",
+  "version": "0.1.0",
+  "description": "A full-featured web-based Blackbox AI CLI client that provides complete interactive functionality for managing Blackbox AI CLI projects.",
   "type": "module",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/d-kimuson/claude-code-viewer.git"
+    "url": "https://github.com/sarthak/blackbox-cli-viewer.git"
   },
-  "homepage": "https://github.com/d-kimuson/claude-code-viewer",
+  "homepage": "https://github.com/sarthak/blackbox-cli-viewer",
   "files": [
     "dist"
   ],
@@ -16,20 +16,20 @@
     "node": ">=20.19.0"
   },
   "bin": {
-    "claude-code-viewer": "./dist/main.js"
+    "blackbox-cli-viewer": "./dist/main.js"
   },
   "scripts": {
-    "dev": "run-p 'dev:*'",
+    "dev": "run-p \"dev:*\"",
     "dev:frontend": "vite",
-    "dev:backend": "CCV_ENV=development tsx watch --env-file-if-exists=.env.local src/server/main.ts",
+    "dev:backend": "BBCV_ENV=development tsx watch --env-file-if-exists=.env.local src/server/main.ts",
     "start": "node dist/main.js",
     "build": "./scripts/build.sh",
     "build:frontend": "vite build",
     "build:backend": "esbuild src/server/main.ts --format=esm --bundle --packages=external --sourcemap --platform=node --outfile=dist/main.js",
-    "lint": "run-s 'lint:*'",
+    "lint": "run-s \"lint:*\"",
     "lint:biome-format": "biome format .",
     "lint:biome-lint": "biome check .",
-    "fix": "run-s 'fix:*'",
+    "fix": "run-s \"fix:*\"",
     "fix:biome-format": "biome format --write .",
     "fix:biome-lint": "biome check --write --unsafe .",
     "typecheck": "tsgo --noEmit",
