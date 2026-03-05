@@ -1,5 +1,41 @@
 # Changelog
 
+## 0.1.0 (Blackbox CLI Viewer - Initial Release)
+
+### Breaking Changes
+
+- **Project Adaptation**: This is a fork of claude-code-viewer adapted for Blackbox AI CLI
+- **Data Directory**: Changed from `~/.claude/` to `~/.blackboxcli/`
+- **Session Format**: Changed from JSONL to JSON format
+- **Environment Variables**: Renamed from `CCV_*` to `BBCV_*`
+- **Package Name**: Changed from `@kimuson/claude-code-viewer` to `@sarthak/blackbox-cli-viewer`
+
+### Features
+
+- **Session Log Viewing**: View Blackbox AI CLI session logs from `~/.blackboxcli/tmp/` directory
+- **Project Discovery**: Automatically discover projects from Blackbox CLI data directory
+- **Session Resume**: Resume conversations from existing session logs
+- **Search**: Full-text search across all conversations
+- **Git Integration**: View diffs and commit changes directly in the UI
+- **Terminal Panel**: Built-in terminal for running shell commands
+- **File Preview**: Preview images, PDFs, and text files
+- **Multi-language Support**: English, Japanese, and Chinese localizations
+- **Dark Mode**: Full dark mode support
+
+### Migration from claude-code-viewer
+
+If you were using claude-code-viewer before:
+
+| Old Variable | New Variable |
+|--------------|--------------|
+| `CCV_PASSWORD` | `BBCV_PASSWORD` |
+| `CCV_CC_EXECUTABLE_PATH` | `BBCV_BB_EXECUTABLE_PATH` |
+| `CCV_GLOBAL_CLAUDE_DIR` | `BBCV_GLOBAL_BLACKBOX_DIR` |
+| `CCV_TERMINAL_DISABLED` | `BBCV_TERMINAL_DISABLED` |
+| `CCV_API_ONLY` | `BBCV_API_ONLY` |
+
+---
+
 ## 0.6.0
 
 ### &nbsp;&nbsp;&nbsp;Features
