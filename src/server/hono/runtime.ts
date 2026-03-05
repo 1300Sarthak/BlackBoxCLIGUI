@@ -1,6 +1,6 @@
 import type { CommandExecutor, FileSystem, Path } from "@effect/platform";
 import { Effect } from "effect";
-import type { ClaudeCodeLifeCycleService } from "../core/claude-code/services/ClaudeCodeLifeCycleService";
+import type { BlackboxCliLifeCycleService } from "../core/blackbox-cli/services/BlackboxCliLifeCycleService";
 import type { BbcvOptionsService } from "../core/platform/services/BbcvOptionsService";
 import type { EnvService } from "../core/platform/services/EnvService";
 import type { UserConfigService } from "../core/platform/services/UserConfigService";
@@ -18,7 +18,7 @@ export type HonoRuntime =
   | Path.Path
   | CommandExecutor.CommandExecutor
   | UserConfigService
-  | ClaudeCodeLifeCycleService
+  | BlackboxCliLifeCycleService
   | ProjectRepository
   | SchedulerConfigBaseDir;
 

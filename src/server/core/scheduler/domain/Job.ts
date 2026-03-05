@@ -1,12 +1,12 @@
 import { Effect } from "effect";
-import { ClaudeCodeLifeCycleService } from "../../claude-code/services/ClaudeCodeLifeCycleService";
+import { BlackboxCliLifeCycleService } from "../../blackbox-cli/services/BlackboxCliLifeCycleService";
 import { UserConfigService } from "../../platform/services/UserConfigService";
 import { ProjectRepository } from "../../project/infrastructure/ProjectRepository";
 import type { SchedulerJob } from "../schema";
 
 export const executeJob = (job: SchedulerJob) =>
   Effect.gen(function* () {
-    const lifeCycleService = yield* ClaudeCodeLifeCycleService;
+    const lifeCycleService = yield* BlackboxCliLifeCycleService;
     const projectRepository = yield* ProjectRepository;
     const userConfigService = yield* UserConfigService;
 

@@ -6,17 +6,17 @@ import { UserConfigService } from "../../platform/services/UserConfigService";
 import { ProjectRepository } from "../../project/infrastructure/ProjectRepository";
 import type { UserMessageInput } from "../functions/createMessageGenerator";
 import type * as CCTurn from "../models/ClaudeCodeTurn";
-import { ClaudeCodeLifeCycleService } from "../services/ClaudeCodeLifeCycleService";
+import { BlackboxCliLifeCycleService } from "../services/BlackboxCliLifeCycleService";
 
 const LayerImpl = Effect.gen(function* () {
   const projectRepository = yield* ProjectRepository;
-  const claudeCodeLifeCycleService = yield* ClaudeCodeLifeCycleService;
+  const blackboxCliLifeCycleService = yield* BlackboxCliLifeCycleService;
   const userConfigService = yield* UserConfigService;
 
   const getSessionProcesses = () =>
     Effect.gen(function* () {
       const publicSessionProcesses =
-        yield* claudeCodeLifeCycleService.getPublicSessionProcesses();
+        yield* blackboxCliLifeCycleService.getPublicSessionProcesses();
 
       return {
         response: {
@@ -61,7 +61,7 @@ const LayerImpl = Effect.gen(function* () {
         } as const satisfies ControllerResponse;
       }
 
-      const result = yield* claudeCodeLifeCycleService.startSessionProcess({
+      const result = yield* blackboxCliLifeCycleService.startSessionProcess({
         projectId,
         cwd: project.meta.projectPath,
         baseSession,
@@ -102,7 +102,7 @@ const LayerImpl = Effect.gen(function* () {
         } as const satisfies ControllerResponse;
       }
 
-      const result = yield* claudeCodeLifeCycleService.continueSessionProcess({
+      const result = yield* blackboxCliLifeCycleService.continueSessionProcess({
         sessionProcessId,
         input,
         baseSessionId,

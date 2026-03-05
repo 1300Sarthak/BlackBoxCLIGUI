@@ -8,7 +8,7 @@ import { testPlatformLayer } from "../../../../testing/layers/testPlatformLayer"
 import type * as CCSessionProcess from "../models/CCSessionProcess";
 import type * as CCTurn from "../models/ClaudeCodeTurn";
 import type { InitMessageContext } from "../types";
-import { ClaudeCodeSessionProcessService } from "./ClaudeCodeSessionProcessService";
+import { BlackboxCliSessionProcessService } from "./BlackboxCliSessionProcessService";
 
 // Helper function to create mock session process definition
 const createMockSessionProcessDef = (
@@ -56,11 +56,11 @@ const createMockResultMessage = (sessionId: string): SDKResultMessage =>
     result: {},
   }) as SDKResultMessage;
 
-describe("ClaudeCodeSessionProcessService", () => {
+describe("BlackboxCliSessionProcessService", () => {
   describe("startSessionProcess", () => {
     it("can start new session process", async () => {
       const program = Effect.gen(function* () {
-        const service = yield* ClaudeCodeSessionProcessService;
+        const service = yield* BlackboxCliSessionProcessService;
 
         const sessionDef = createMockSessionProcessDef("process-1");
         const turnDef = createMockNewTaskDef("task-1");
@@ -75,7 +75,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
       const result = await Effect.runPromise(
         program.pipe(
-          Effect.provide(ClaudeCodeSessionProcessService.Live),
+          Effect.provide(BlackboxCliSessionProcessService.Live),
           Effect.provide(testPlatformLayer()),
         ),
       );
@@ -88,7 +88,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
     it("creates session process with correct task structure", async () => {
       const program = Effect.gen(function* () {
-        const service = yield* ClaudeCodeSessionProcessService;
+        const service = yield* BlackboxCliSessionProcessService;
 
         const sessionDef = createMockSessionProcessDef("process-1");
         const turnDef = createMockNewTaskDef("task-1");
@@ -103,7 +103,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
       const { result, turnDef } = await Effect.runPromise(
         program.pipe(
-          Effect.provide(ClaudeCodeSessionProcessService.Live),
+          Effect.provide(BlackboxCliSessionProcessService.Live),
           Effect.provide(testPlatformLayer()),
         ),
       );
@@ -117,7 +117,7 @@ describe("ClaudeCodeSessionProcessService", () => {
   describe("getSessionProcess", () => {
     it("can retrieve created session process", async () => {
       const program = Effect.gen(function* () {
-        const service = yield* ClaudeCodeSessionProcessService;
+        const service = yield* BlackboxCliSessionProcessService;
 
         const sessionDef = createMockSessionProcessDef("process-1");
         const turnDef = createMockNewTaskDef("task-1");
@@ -134,7 +134,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
       const process = await Effect.runPromise(
         program.pipe(
-          Effect.provide(ClaudeCodeSessionProcessService.Live),
+          Effect.provide(BlackboxCliSessionProcessService.Live),
           Effect.provide(testPlatformLayer()),
         ),
       );
@@ -145,7 +145,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
     it("fails with SessionProcessNotFoundError for non-existent process", async () => {
       const program = Effect.gen(function* () {
-        const service = yield* ClaudeCodeSessionProcessService;
+        const service = yield* BlackboxCliSessionProcessService;
 
         const result = yield* Effect.flip(
           service.getSessionProcess("non-existent"),
@@ -156,7 +156,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
       const error = await Effect.runPromise(
         program.pipe(
-          Effect.provide(ClaudeCodeSessionProcessService.Live),
+          Effect.provide(BlackboxCliSessionProcessService.Live),
           Effect.provide(testPlatformLayer()),
         ),
       );
@@ -171,7 +171,7 @@ describe("ClaudeCodeSessionProcessService", () => {
   describe("getSessionProcesses", () => {
     it("returns empty array when no processes exist", async () => {
       const program = Effect.gen(function* () {
-        const service = yield* ClaudeCodeSessionProcessService;
+        const service = yield* BlackboxCliSessionProcessService;
 
         const processes = yield* service.getSessionProcesses();
 
@@ -180,7 +180,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
       const processes = await Effect.runPromise(
         program.pipe(
-          Effect.provide(ClaudeCodeSessionProcessService.Live),
+          Effect.provide(BlackboxCliSessionProcessService.Live),
           Effect.provide(testPlatformLayer()),
         ),
       );
@@ -190,7 +190,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
     it("returns all created processes", async () => {
       const program = Effect.gen(function* () {
-        const service = yield* ClaudeCodeSessionProcessService;
+        const service = yield* BlackboxCliSessionProcessService;
 
         const sessionDef1 = createMockSessionProcessDef("process-1");
         const turnDef1 = createMockNewTaskDef("task-1");
@@ -214,7 +214,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
       const processes = await Effect.runPromise(
         program.pipe(
-          Effect.provide(ClaudeCodeSessionProcessService.Live),
+          Effect.provide(BlackboxCliSessionProcessService.Live),
           Effect.provide(testPlatformLayer()),
         ),
       );
@@ -229,7 +229,7 @@ describe("ClaudeCodeSessionProcessService", () => {
   describe("continueSessionProcess", () => {
     it("can continue paused session process", async () => {
       const program = Effect.gen(function* () {
-        const service = yield* ClaudeCodeSessionProcessService;
+        const service = yield* BlackboxCliSessionProcessService;
 
         // Start and progress to paused state
         const sessionDef = createMockSessionProcessDef("process-1");
@@ -276,7 +276,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
       const result = await Effect.runPromise(
         program.pipe(
-          Effect.provide(ClaudeCodeSessionProcessService.Live),
+          Effect.provide(BlackboxCliSessionProcessService.Live),
           Effect.provide(testPlatformLayer()),
         ),
       );
@@ -288,7 +288,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
     it("fails with SessionProcessNotPausedError when process is not paused", async () => {
       const program = Effect.gen(function* () {
-        const service = yield* ClaudeCodeSessionProcessService;
+        const service = yield* BlackboxCliSessionProcessService;
 
         const sessionDef = createMockSessionProcessDef("process-1");
         const turnDef = createMockNewTaskDef("task-1");
@@ -316,7 +316,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
       const error = await Effect.runPromise(
         program.pipe(
-          Effect.provide(ClaudeCodeSessionProcessService.Live),
+          Effect.provide(BlackboxCliSessionProcessService.Live),
           Effect.provide(testPlatformLayer()),
         ),
       );
@@ -329,7 +329,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
     it("fails with SessionProcessNotFoundError for non-existent process", async () => {
       const program = Effect.gen(function* () {
-        const service = yield* ClaudeCodeSessionProcessService;
+        const service = yield* BlackboxCliSessionProcessService;
 
         const continueTaskDef = createMockContinueTaskDef(
           "task-1",
@@ -349,7 +349,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
       const error = await Effect.runPromise(
         program.pipe(
-          Effect.provide(ClaudeCodeSessionProcessService.Live),
+          Effect.provide(BlackboxCliSessionProcessService.Live),
           Effect.provide(testPlatformLayer()),
         ),
       );
@@ -364,7 +364,7 @@ describe("ClaudeCodeSessionProcessService", () => {
   describe("toNotInitializedState", () => {
     it("can transition from pending to not_initialized", async () => {
       const program = Effect.gen(function* () {
-        const service = yield* ClaudeCodeSessionProcessService;
+        const service = yield* BlackboxCliSessionProcessService;
 
         const sessionDef = createMockSessionProcessDef("process-1");
         const turnDef = createMockNewTaskDef("task-1");
@@ -384,7 +384,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
       const result = await Effect.runPromise(
         program.pipe(
-          Effect.provide(ClaudeCodeSessionProcessService.Live),
+          Effect.provide(BlackboxCliSessionProcessService.Live),
           Effect.provide(testPlatformLayer()),
         ),
       );
@@ -396,7 +396,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
     it("fails with IllegalStateChangeError when not in pending state", async () => {
       const program = Effect.gen(function* () {
-        const service = yield* ClaudeCodeSessionProcessService;
+        const service = yield* BlackboxCliSessionProcessService;
 
         const sessionDef = createMockSessionProcessDef("process-1");
         const turnDef = createMockNewTaskDef("task-1");
@@ -424,7 +424,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
       const error = await Effect.runPromise(
         program.pipe(
-          Effect.provide(ClaudeCodeSessionProcessService.Live),
+          Effect.provide(BlackboxCliSessionProcessService.Live),
           Effect.provide(testPlatformLayer()),
         ),
       );
@@ -440,7 +440,7 @@ describe("ClaudeCodeSessionProcessService", () => {
   describe("toInitializedState", () => {
     it("can transition from not_initialized to initialized", async () => {
       const program = Effect.gen(function* () {
-        const service = yield* ClaudeCodeSessionProcessService;
+        const service = yield* BlackboxCliSessionProcessService;
 
         const sessionDef = createMockSessionProcessDef("process-1");
         const turnDef = createMockNewTaskDef("task-1");
@@ -467,7 +467,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
       const result = await Effect.runPromise(
         program.pipe(
-          Effect.provide(ClaudeCodeSessionProcessService.Live),
+          Effect.provide(BlackboxCliSessionProcessService.Live),
           Effect.provide(testPlatformLayer()),
         ),
       );
@@ -479,7 +479,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
     it("fails with IllegalStateChangeError when not in not_initialized state", async () => {
       const program = Effect.gen(function* () {
-        const service = yield* ClaudeCodeSessionProcessService;
+        const service = yield* BlackboxCliSessionProcessService;
 
         const sessionDef = createMockSessionProcessDef("process-1");
         const turnDef = createMockNewTaskDef("task-1");
@@ -503,7 +503,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
       const error = await Effect.runPromise(
         program.pipe(
-          Effect.provide(ClaudeCodeSessionProcessService.Live),
+          Effect.provide(BlackboxCliSessionProcessService.Live),
           Effect.provide(testPlatformLayer()),
         ),
       );
@@ -519,7 +519,7 @@ describe("ClaudeCodeSessionProcessService", () => {
   describe("toPausedState", () => {
     it("can transition from initialized to paused", async () => {
       const program = Effect.gen(function* () {
-        const service = yield* ClaudeCodeSessionProcessService;
+        const service = yield* BlackboxCliSessionProcessService;
 
         const sessionDef = createMockSessionProcessDef("process-1");
         const turnDef = createMockNewTaskDef("task-1");
@@ -551,7 +551,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
       const result = await Effect.runPromise(
         program.pipe(
-          Effect.provide(ClaudeCodeSessionProcessService.Live),
+          Effect.provide(BlackboxCliSessionProcessService.Live),
           Effect.provide(testPlatformLayer()),
         ),
       );
@@ -562,7 +562,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
     it("can transition from file_created to paused", async () => {
       const program = Effect.gen(function* () {
-        const service = yield* ClaudeCodeSessionProcessService;
+        const service = yield* BlackboxCliSessionProcessService;
 
         const sessionDef = createMockSessionProcessDef("process-1");
         const turnDef = createMockNewTaskDef("task-1");
@@ -598,7 +598,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
       const result = await Effect.runPromise(
         program.pipe(
-          Effect.provide(ClaudeCodeSessionProcessService.Live),
+          Effect.provide(BlackboxCliSessionProcessService.Live),
           Effect.provide(testPlatformLayer()),
         ),
       );
@@ -609,7 +609,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
     it("marks current task as completed", async () => {
       const program = Effect.gen(function* () {
-        const service = yield* ClaudeCodeSessionProcessService;
+        const service = yield* BlackboxCliSessionProcessService;
 
         const sessionDef = createMockSessionProcessDef("process-1");
         const turnDef = createMockNewTaskDef("task-1");
@@ -645,7 +645,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
       const process = await Effect.runPromise(
         program.pipe(
-          Effect.provide(ClaudeCodeSessionProcessService.Live),
+          Effect.provide(BlackboxCliSessionProcessService.Live),
           Effect.provide(testPlatformLayer()),
         ),
       );
@@ -661,7 +661,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
     it("fails with IllegalStateChangeError when not in initialized or file_created state", async () => {
       const program = Effect.gen(function* () {
-        const service = yield* ClaudeCodeSessionProcessService;
+        const service = yield* BlackboxCliSessionProcessService;
 
         const sessionDef = createMockSessionProcessDef("process-1");
         const turnDef = createMockNewTaskDef("task-1");
@@ -683,7 +683,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
       const error = await Effect.runPromise(
         program.pipe(
-          Effect.provide(ClaudeCodeSessionProcessService.Live),
+          Effect.provide(BlackboxCliSessionProcessService.Live),
           Effect.provide(testPlatformLayer()),
         ),
       );
@@ -699,7 +699,7 @@ describe("ClaudeCodeSessionProcessService", () => {
   describe("toCompletedState", () => {
     it("can transition to completed state from any state", async () => {
       const program = Effect.gen(function* () {
-        const service = yield* ClaudeCodeSessionProcessService;
+        const service = yield* BlackboxCliSessionProcessService;
 
         const sessionDef = createMockSessionProcessDef("process-1");
         const turnDef = createMockNewTaskDef("task-1");
@@ -723,7 +723,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
       const result = await Effect.runPromise(
         program.pipe(
-          Effect.provide(ClaudeCodeSessionProcessService.Live),
+          Effect.provide(BlackboxCliSessionProcessService.Live),
           Effect.provide(testPlatformLayer()),
         ),
       );
@@ -733,7 +733,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
     it("marks current task as completed when no error", async () => {
       const program = Effect.gen(function* () {
-        const service = yield* ClaudeCodeSessionProcessService;
+        const service = yield* BlackboxCliSessionProcessService;
 
         const sessionDef = createMockSessionProcessDef("process-1");
         const turnDef = createMockNewTaskDef("task-1");
@@ -762,7 +762,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
       const result = await Effect.runPromise(
         program.pipe(
-          Effect.provide(ClaudeCodeSessionProcessService.Live),
+          Effect.provide(BlackboxCliSessionProcessService.Live),
           Effect.provide(testPlatformLayer()),
         ),
       );
@@ -772,7 +772,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
     it("marks current task as failed when error is provided", async () => {
       const program = Effect.gen(function* () {
-        const service = yield* ClaudeCodeSessionProcessService;
+        const service = yield* BlackboxCliSessionProcessService;
 
         const sessionDef = createMockSessionProcessDef("process-1");
         const turnDef = createMockNewTaskDef("task-1");
@@ -799,7 +799,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
       const result = await Effect.runPromise(
         program.pipe(
-          Effect.provide(ClaudeCodeSessionProcessService.Live),
+          Effect.provide(BlackboxCliSessionProcessService.Live),
           Effect.provide(testPlatformLayer()),
         ),
       );
@@ -814,7 +814,7 @@ describe("ClaudeCodeSessionProcessService", () => {
   describe("getTask", () => {
     it("can retrieve task by turnId", async () => {
       const program = Effect.gen(function* () {
-        const service = yield* ClaudeCodeSessionProcessService;
+        const service = yield* BlackboxCliSessionProcessService;
 
         const sessionDef = createMockSessionProcessDef("process-1");
         const turnDef = createMockNewTaskDef("task-1");
@@ -831,7 +831,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
       const result = await Effect.runPromise(
         program.pipe(
-          Effect.provide(ClaudeCodeSessionProcessService.Live),
+          Effect.provide(BlackboxCliSessionProcessService.Live),
           Effect.provide(testPlatformLayer()),
         ),
       );
@@ -842,7 +842,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
     it("fails with TaskNotFoundError for non-existent task", async () => {
       const program = Effect.gen(function* () {
-        const service = yield* ClaudeCodeSessionProcessService;
+        const service = yield* BlackboxCliSessionProcessService;
 
         const result = yield* Effect.flip(service.getTask("non-existent-task"));
 
@@ -851,7 +851,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
       const error = await Effect.runPromise(
         program.pipe(
-          Effect.provide(ClaudeCodeSessionProcessService.Live),
+          Effect.provide(BlackboxCliSessionProcessService.Live),
           Effect.provide(testPlatformLayer()),
         ),
       );
@@ -866,7 +866,7 @@ describe("ClaudeCodeSessionProcessService", () => {
   describe("state transitions flow", () => {
     it("can complete full lifecycle: pending -> not_initialized -> initialized -> file_created -> paused", async () => {
       const program = Effect.gen(function* () {
-        const service = yield* ClaudeCodeSessionProcessService;
+        const service = yield* BlackboxCliSessionProcessService;
 
         const sessionDef = createMockSessionProcessDef("process-1");
         const turnDef = createMockNewTaskDef("task-1");
@@ -905,7 +905,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
       const result = await Effect.runPromise(
         program.pipe(
-          Effect.provide(ClaudeCodeSessionProcessService.Live),
+          Effect.provide(BlackboxCliSessionProcessService.Live),
           Effect.provide(testPlatformLayer()),
         ),
       );
@@ -916,7 +916,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
     it("can continue paused process and complete another task", async () => {
       const program = Effect.gen(function* () {
-        const service = yield* ClaudeCodeSessionProcessService;
+        const service = yield* BlackboxCliSessionProcessService;
 
         // First task lifecycle
         const sessionDef = createMockSessionProcessDef("process-1");
@@ -983,7 +983,7 @@ describe("ClaudeCodeSessionProcessService", () => {
 
       const result = await Effect.runPromise(
         program.pipe(
-          Effect.provide(ClaudeCodeSessionProcessService.Live),
+          Effect.provide(BlackboxCliSessionProcessService.Live),
           Effect.provide(testPlatformLayer()),
         ),
       );

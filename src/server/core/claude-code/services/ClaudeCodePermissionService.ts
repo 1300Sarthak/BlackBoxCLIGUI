@@ -149,10 +149,10 @@ const LayerImpl = Effect.gen(function* () {
   };
 });
 
-export type IClaudeCodePermissionService = InferEffect<typeof LayerImpl>;
+export type IBlackboxCliPermissionService = InferEffect<typeof LayerImpl>;
 
-export class ClaudeCodePermissionService extends Context.Tag(
-  "ClaudeCodePermissionService",
-)<ClaudeCodePermissionService, IClaudeCodePermissionService>() {
+export class BlackboxCliPermissionService extends Context.Tag(
+  "BlackboxCliPermissionService",
+)<BlackboxCliPermissionService, IBlackboxCliPermissionService>() {
   static Live = Layer.effect(this, LayerImpl);
 }

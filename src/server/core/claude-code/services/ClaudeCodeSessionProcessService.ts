@@ -497,10 +497,10 @@ const LayerImpl = Effect.gen(function* () {
   };
 });
 
-export type IClaudeCodeSessionProcessService = InferEffect<typeof LayerImpl>;
+export type IBlackboxCliSessionProcessService = InferEffect<typeof LayerImpl>;
 
-export class ClaudeCodeSessionProcessService extends Context.Tag(
-  "ClaudeCodeSessionProcessService",
-)<ClaudeCodeSessionProcessService, IClaudeCodeSessionProcessService>() {
+export class BlackboxCliSessionProcessService extends Context.Tag(
+  "BlackboxCliSessionProcessService",
+)<BlackboxCliSessionProcessService, IBlackboxCliSessionProcessService>() {
   static Live = Layer.effect(this, LayerImpl);
 }

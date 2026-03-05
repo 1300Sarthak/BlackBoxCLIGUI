@@ -16,7 +16,7 @@ import {
   Collapsible,
   CollapsibleContent,
 } from "../../../../../components/ui/collapsible";
-import { claudeCommandsQuery } from "../../../../../lib/api/queries";
+import { blackboxCommandsQuery } from "../../../../../lib/api/queries";
 import { cn } from "../../../../../lib/utils";
 
 type CommandInfo = {
@@ -48,8 +48,8 @@ export const CommandCompletion = forwardRef<
 
   // コマンドリストを取得
   const { data: commandData } = useQuery({
-    queryKey: claudeCommandsQuery(projectId).queryKey,
-    queryFn: claudeCommandsQuery(projectId).queryFn,
+    queryKey: blackboxCommandsQuery(projectId).queryKey,
+    queryFn: blackboxCommandsQuery(projectId).queryFn,
     staleTime: 1000 * 60 * 5, // 5分間キャッシュ
   });
 

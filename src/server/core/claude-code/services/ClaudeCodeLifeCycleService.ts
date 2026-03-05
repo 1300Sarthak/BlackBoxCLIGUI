@@ -22,8 +22,8 @@ import {
 import * as CCSessionProcess from "../models/CCSessionProcess";
 import * as ClaudeCode from "../models/ClaudeCode";
 import type * as CCTurn from "../models/ClaudeCodeTurn";
-import { ClaudeCodePermissionService } from "./ClaudeCodePermissionService";
-import { ClaudeCodeSessionProcessService } from "./ClaudeCodeSessionProcessService";
+import { BlackboxCliPermissionService } from "./BlackboxCliPermissionService";
+import { BlackboxCliSessionProcessService } from "./BlackboxCliSessionProcessService";
 
 export type MessageGenerator = () => AsyncGenerator<
   SDKUserMessage,
@@ -34,9 +34,9 @@ export type MessageGenerator = () => AsyncGenerator<
 const LayerImpl = Effect.gen(function* () {
   const eventBusService = yield* EventBus;
   const sessionRepository = yield* SessionRepository;
-  const sessionProcessService = yield* ClaudeCodeSessionProcessService;
+  const sessionProcessService = yield* BlackboxCliSessionProcessService;
   const virtualConversationDatabase = yield* VirtualConversationDatabase;
-  const permissionService = yield* ClaudeCodePermissionService;
+  const permissionService = yield* BlackboxCliPermissionService;
 
   const runtime = yield* Effect.runtime<
     | FileSystem.FileSystem
@@ -44,7 +44,7 @@ const LayerImpl = Effect.gen(function* () {
     | CommandExecutor
     | VirtualConversationDatabase
     | SessionMetaService
-    | ClaudeCodePermissionService
+    | BlackboxCliPermissionService
     | EnvService
     | BbcvOptionsService
   >();
@@ -464,10 +464,10 @@ const LayerImpl = Effect.gen(function* () {
   };
 });
 
-export type IClaudeCodeLifeCycleService = InferEffect<typeof LayerImpl>;
+export type IBlackboxCliLifeCycleService = InferEffect<typeof LayerImpl>;
 
-export class ClaudeCodeLifeCycleService extends Context.Tag(
-  "ClaudeCodeLifeCycleService",
-)<ClaudeCodeLifeCycleService, IClaudeCodeLifeCycleService>() {
+export class BlackboxCliLifeCycleService extends Context.Tag(
+  "BlackboxCliLifeCycleService",
+)<BlackboxCliLifeCycleService, IBlackboxCliLifeCycleService>() {
   static Live = Layer.effect(this, LayerImpl);
 }

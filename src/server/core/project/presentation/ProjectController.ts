@@ -3,7 +3,7 @@ import { Context, Effect, Layer } from "effect";
 import type { ControllerResponse } from "../../../lib/effect/toEffectResponse";
 import type { InferEffect } from "../../../lib/effect/types";
 import { computeClaudeProjectFilePath } from "../../claude-code/functions/computeClaudeProjectFilePath";
-import { ClaudeCodeLifeCycleService } from "../../claude-code/services/ClaudeCodeLifeCycleService";
+import { BlackboxCliLifeCycleService } from "../../blackbox-cli/services/BlackboxCliLifeCycleService";
 import { ApplicationContext } from "../../platform/services/ApplicationContext";
 import { UserConfigService } from "../../platform/services/UserConfigService";
 import { SessionRepository } from "../../session/infrastructure/SessionRepository";
@@ -12,7 +12,7 @@ import { ProjectRepository } from "../infrastructure/ProjectRepository";
 
 const LayerImpl = Effect.gen(function* () {
   const projectRepository = yield* ProjectRepository;
-  const claudeCodeLifeCycleService = yield* ClaudeCodeLifeCycleService;
+  const blackboxCliLifeCycleService = yield* BlackboxCliLifeCycleService;
   const userConfigService = yield* UserConfigService;
   const sessionRepository = yield* SessionRepository;
   const context = yield* ApplicationContext;
@@ -139,7 +139,7 @@ const LayerImpl = Effect.gen(function* () {
       const claudeMdPath = path.join(projectPath, "CLAUDE.md");
       const claudeMdExists = yield* fileSystem.exists(claudeMdPath);
 
-      const result = yield* claudeCodeLifeCycleService.startSessionProcess({
+      const result = yield* blackboxCliLifeCycleService.startSessionProcess({
         projectId,
         cwd: projectPath,
         baseSession: undefined,

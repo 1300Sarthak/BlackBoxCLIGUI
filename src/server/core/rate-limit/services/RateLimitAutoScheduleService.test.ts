@@ -2,8 +2,8 @@ import { FileSystem, Path } from "@effect/platform";
 import { Effect, Layer } from "effect";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { testPlatformLayer } from "../../../../testing/layers/testPlatformLayer";
-import { ClaudeCodeLifeCycleService } from "../../claude-code/services/ClaudeCodeLifeCycleService";
-import { ClaudeCodeSessionProcessService } from "../../claude-code/services/ClaudeCodeSessionProcessService";
+import { BlackboxCliLifeCycleService } from "../../blackbox-cli/services/BlackboxCliLifeCycleService";
+import { BlackboxCliSessionProcessService } from "../../blackbox-cli/services/BlackboxCliSessionProcessService";
 import { EventBus } from "../../events/services/EventBus";
 import { ProjectRepository } from "../../project/infrastructure/ProjectRepository";
 import { SchedulerConfigBaseDir } from "../../scheduler/config";
@@ -101,12 +101,12 @@ describe("RateLimitAutoScheduleService", () => {
     });
   };
 
-  // Mock ClaudeCodeSessionProcessService with configurable live processes
+  // Mock BlackboxCliSessionProcessService with configurable live processes
   const createMockSessionProcessService = (
     liveSessionIds: Set<string> = new Set(),
     projectIdForSession: Map<string, string> = new Map(),
   ) => {
-    return Layer.succeed(ClaudeCodeSessionProcessService, {
+    return Layer.succeed(BlackboxCliSessionProcessService, {
       startSessionProcess: () =>
         Effect.succeed({ sessionProcess: {} as never, task: {} as never }),
       continueSessionProcess: () =>
@@ -160,8 +160,8 @@ describe("RateLimitAutoScheduleService", () => {
       } as never),
   } as never);
 
-  // Mock ClaudeCodeLifeCycleService
-  const mockLifeCycleService = Layer.succeed(ClaudeCodeLifeCycleService, {
+  // Mock BlackboxCliLifeCycleService
+  const mockLifeCycleService = Layer.succeed(BlackboxCliLifeCycleService, {
     startTask: () => Effect.void,
     continueTask: () => Effect.void,
   } as never);
