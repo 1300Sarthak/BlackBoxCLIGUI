@@ -2,6 +2,8 @@
 
 A full-featured web-based Blackbox AI CLI client that provides complete interactive functionality for managing Blackbox AI CLI projects. Start new conversations, resume existing sessions, monitor running tasks in real-time, and browse your conversation history—all through a modern web interface.
 
+[![License](https://img.shields.io/github/license/1300Sarthak/BlackBoxCLIGUI)](https://github.com/1300Sarthak/BlackBoxCLIGUI/blob/main/LICENSE)
+
 ## Introduction
 
 Blackbox CLI Viewer is a web-based Blackbox AI CLI client focused on **comprehensive session log analysis**. It preserves and organizes all conversation data through strict schema validation and a progressive disclosure UI that reveals details on demand.
@@ -20,9 +22,14 @@ Blackbox CLI Viewer is a web-based Blackbox AI CLI client focused on **comprehen
 | Review Changes | Built-in Git Diff Viewer lets you review all changes directly within the viewer |
 | Commit Changes | Execute Git commits directly from the web interface |
 | Terminal Panel | Bottom panel terminal over WebSocket for running shell commands without leaving the UI |
-| Multi-language Support | Full internationalization support |
+| Multi-language Support | Full internationalization support (English, Japanese, Chinese) |
 
 ## Installation & Usage
+
+### Prerequisites
+
+- **Node.js**: Version 20.19.0 or later
+- **Blackbox AI CLI**: Install from [blackbox.ai/cli](https://www.blackbox.ai/cli)
 
 ### Quick Start (CLI)
 
@@ -52,6 +59,9 @@ Options:
   -P, --password <password>        Password for authentication
   -e, --executable <executable>    Path to Blackbox AI CLI executable
   --blackbox-dir <blackbox-dir>    Path to Blackbox directory
+  --terminal-disabled              Disable the in-app terminal panel
+  --terminal-shell <path>          Shell executable for terminal sessions
+  --terminal-unrestricted          Disable restricted shell flags for bash
   --api-only                       Run in API-only mode without Web UI
 \`\`\`
 
@@ -66,9 +76,10 @@ docker build -t blackbox-cli-viewer .
 Run the container directly:
 
 \`\`\`bash
-docker run --rm -p 3400:3400 \
-  -e PORT=3400 \
-  -e BBCV_PASSWORD=your-password \
+docker run --rm -p 3400:3400 \\
+  -e PORT=3400 \\
+  -e BBCV_PASSWORD=your-password \\
+  -v ~/.blackboxcli:/root/.blackboxcli \\
   blackbox-cli-viewer
 \`\`\`
 
@@ -76,9 +87,26 @@ docker run --rm -p 3400:3400 \
 
 The application reads Blackbox AI CLI conversation logs from:
 
-- **Location**: \`~/.blackboxcli/tmp/<hash>/logs.json\`
-- **Format**: JSON files containing conversation entries
-- **Auto-detection**: Automatically discovers new projects and sessions
+| Data Type | Location | Format |
+|-----------|----------|--------|
+| Session Logs | \`~/.blackboxcli/tmp/<hash>/logs.json\` | JSON array of messages |
+| Checkpoints | \`~/.blackboxcli/tmp/<hash>/checkpoint-session-*.json\` | JSON array |
+| Settings | \`~/.blackboxcli/settings.json\` | JSON object |
+| Todos | \`~/.blackboxcli/todos/<session-id>.json\` | JSON object |
+
+### Message Format
+
+Blackbox CLI uses a simple message format:
+
+\`\`\`json
+{
+  "sessionId": "session-uuid",
+  "messageId": 0,
+  "type": "user",
+  "message": "Hello, how are you?",
+  "timestamp": "2026-03-04T12:00:00.000Z"
+}
+\`\`\`
 
 ## Requirements
 
@@ -93,23 +121,75 @@ The application reads Blackbox AI CLI conversation logs from:
 
 ### Environment Variables
 
-**BBCV_ENV Consideration**: If you have \`BBCV_ENV=development\` set in your environment, the application will start in development mode. For production use, set \`BBCV_ENV=production\` or leave it unset.
+| Variable | Description | Default |
+|----------|-------------|---------|
+| \`BBCV_ENV\` | Environment mode (development/production) | production |
+| \`PORT\` | Server port | 3000 |
+| \`HOSTNAME\` | Server hostname | localhost |
+| \`BBCV_PASSWORD\` | Authentication password | (none) |
+| \`BBCV_BB_EXECUTABLE_PATH\` | Path to Blackbox CLI | (auto-detect) |
+| \`BBCV_GLOBAL_BLACKBOX_DIR\` | Path to Blackbox directory | ~/.blackboxcli |
+| \`BBCV_TERMINAL_DISABLED\` | Disable terminal panel | (unset) |
+| \`BBCV_TERMINAL_SHELL\` | Shell executable | (auto-detect) |
+| \`BBCV_TERMINAL_UNRESTRICTED\` | Unrestricted shell mode | (unset) |
+| \`BBCV_API_ONLY\` | API-only mode | (unset) |
 
-## Configuration
+## Architecture
 
-### Command-Line Options and Environment Variables
+\`\`\`
+┌─────────────────────────────────────────────────────────────┐
+│                      Frontend (React)                        │
+│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐           │
+│  │ Chat    │ │ Session │ │ Git     │ │ Search  │           │
+│  │ View    │ │ List    │ │ Diff    │ │ Dialog  │           │
+│  └─────────┘ └─────────┘ └─────────┘ └─────────┘           │
+└─────────────────────────────────────────────────────────────┘
+                          │ HTTP/WebSocket
+┌─────────────────────────────────────────────────────────────┐
+│                      Backend (Hono/Effect)                   │
+│  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐           │
+│  │ BlackboxCli │ │ Session     │ │ Project     │           │
+│  │ Service     │ │ Repository  │ │ Repository  │           │
+│  └─────────────┘ └─────────────┘ └─────────────┘           │
+└─────────────────────────────────────────────────────────────┘
+                          │ File System
+┌─────────────────────────────────────────────────────────────┐
+│                    Blackbox CLI Data                         │
+│  ~/.blackboxcli/                                             │
+│  ├── tmp/<hash>/logs.json                                    │
+│  ├── settings.json                                           │
+│  └── todos/<session-id>.json                                 │
+└─────────────────────────────────────────────────────────────┘
+\`\`\`
 
-| Command-Line Option | Environment Variable | Description | Default |
-| --- | --- | --- | --- |
-| \`-p, --port <port>\` | \`PORT\` | Port number for the viewer to run on | \`3000\` |
-| \`-h, --hostname <hostname>\` | \`HOSTNAME\` | Hostname to listen on for remote access | \`localhost\` |
-| \`-P, --password <password>\` | \`BBCV_PASSWORD\` | Password for authentication | (none) |
-| \`-e, --executable <executable>\` | \`BBCV_BB_EXECUTABLE_PATH\` | Path to Blackbox AI CLI installation | (auto-detect) |
-| \`--blackbox-dir <blackbox-dir>\` | \`BBCV_GLOBAL_BLACKBOX_DIR\` | Path to Blackbox directory | \`~/.blackboxcli\` |
-| \`--terminal-disabled\` | \`BBCV_TERMINAL_DISABLED\` | Disable the in-app terminal panel | (unset) |
-| \`--terminal-shell <path>\` | \`BBCV_TERMINAL_SHELL\` | Shell executable for terminal sessions | (auto-detect) |
-| \`--terminal-unrestricted\` | \`BBCV_TERMINAL_UNRESTRICTED\` | Disable restricted shell flags for bash | (unset) |
-| \`--api-only\` | \`BBCV_API_ONLY\` | Run in API-only mode | (unset) |
+## Development
+
+### Setup
+
+\`\`\`bash
+# Clone the repository
+git clone https://github.com/1300Sarthak/BlackBoxCLIGUI.git
+cd BlackBoxCLIGUI
+
+# Install dependencies
+npm install
+
+# Build the project
+npm run build
+
+# Start the development server
+npm run dev
+\`\`\`
+
+### Available Scripts
+
+| Script | Description |
+|--------|-------------|
+| \`npm run build\` | Build the project for production |
+| \`npm run dev\` | Start development server |
+| \`npm run typecheck\` | Run TypeScript type checking |
+| \`npm run lint\` | Run linting |
+| \`npm run test\` | Run tests |
 
 ## Privacy
 
@@ -123,6 +203,22 @@ This project is available under the MIT License.
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+1. Fork the repository
+2. Create your feature branch (\`git checkout -b feature/amazing-feature\`)
+3. Commit your changes (\`git commit -m 'feat: add amazing feature
+
+Co-authored-by: Qwen-Coder <qwen-coder@alibabacloud.com>'\`)
+4. Push to the branch (\`git push origin feature/amazing-feature\`)
+5. Open a Pull Request
+
 ## Attribution
 
 This project is a fork of [claude-code-viewer](https://github.com/d-kimuson/claude-code-viewer) by [@d-kimuson](https://github.com/d-kimuson), adapted to work with Blackbox AI CLI.
+
+### Key Changes from Original
+
+- Data layer adapted to read from \`~/.blackboxcli/\` instead of \`~/.claude/\`
+- Session format parsing changed from JSONL to JSON
+- Removed Anthropic SDK dependencies
+- Branding updated throughout
+- Configuration paths and environment variables renamed (CCV_* → BBCV_*)
