@@ -4,7 +4,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         374
       ]
     ],
@@ -78,7 +78,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         214
       ]
     ],
@@ -134,7 +134,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         106
       ]
     ],
@@ -252,7 +252,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         114
       ]
     ],
@@ -839,7 +839,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         693
       ]
     ],
@@ -1620,7 +1620,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         647
       ]
     ],
@@ -1631,7 +1631,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         596
       ]
     ],
@@ -1642,7 +1642,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         620
       ]
     ],
@@ -1653,7 +1653,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         514
       ]
     ],
@@ -1664,7 +1664,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         301
       ]
     ],
@@ -1837,7 +1837,7 @@
         97
       ]
     ],
-    "translation": "Claude Code のタスクが完了した時に再生する音を選択してください"
+    "translation": "Blackbox CLI のタスクが完了した時に再生する音を選択してください"
   },
   "notification.none": {
     "placeholders": {},
@@ -2079,7 +2079,7 @@
         74
       ]
     ],
-    "translation": "Claude Codeプロジェクトとしてセットアップするディレクトリまで移動してください。CLAUDE.mdが存在する場合はプロジェクトを説明し、存在しない場合は<0>/init</0>で初期化します。"
+    "translation": "Blackbox CLIプロジェクトとしてセットアップするディレクトリまで移動してください。CLAUDE.mdが存在する場合はプロジェクトを説明し、存在しない場合は<0>/init</0>で初期化します。"
   },
   "project.setup.title": {
     "placeholders": {},
@@ -2123,7 +2123,7 @@
         31
       ]
     ],
-    "translation": "~/.claude/projectsディレクトリにClaude Codeプロジェクトが見つかりません。Claude Codeとの会話を開始して、最初のプロジェクトをセットアップしてください。"
+    "translation": "~/.claude/projectsディレクトリにBlackbox CLIプロジェクトが見つかりません。Blackbox CLIとの会話を開始して、最初のプロジェクトをセットアップしてください。"
   },
   "project_list.no_projects.title": {
     "placeholders": {},
@@ -2156,7 +2156,7 @@
         13
       ]
     ],
-    "translation": "Claude Codeの会話履歴とプロジェクトの操作を閲覧"
+    "translation": "Blackbox CLIの会話履歴とプロジェクトの操作を閲覧"
   },
   "projects.page.loading": {
     "placeholders": {},
@@ -2223,7 +2223,7 @@
         170
       ]
     ],
-    "translation": "Claude Codeにメッセージを送信するスケジュールジョブを設定します"
+    "translation": "Blackbox CLIにメッセージを送信するスケジュールジョブを設定します"
   },
   "scheduler.dialog.title.create": {
     "placeholders": {},
@@ -2352,7 +2352,7 @@
     "translation": "/でコマンド補完、@でファイル補完"
   },
   "scheduler.form.message.placeholder": {
-    "message": "Type message to send to Claude Code... (/ for commands, @ for files)",
+    "message": "Type message to send to Blackbox CLI... (/ for commands, @ for files)",
     "placeholders": {},
     "comments": [],
     "origin": [
@@ -2361,7 +2361,7 @@
         274
       ]
     ],
-    "translation": "Claude Codeに送信するメッセージを入力... (/でコマンド補完、@でファイル補完)"
+    "translation": "Blackbox CLIに送信するメッセージを入力... (/でコマンド補完、@でファイル補完)"
   },
   "scheduler.form.name": {
     "placeholders": {},
@@ -2740,7 +2740,7 @@
         668
       ]
     ],
-    "translation": "Claude Codeが処理中..."
+    "translation": "Blackbox CLIが処理中..."
   },
   "session.scheduled_messages.disabled": {
     "placeholders": {},
@@ -2860,7 +2860,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         530
       ]
     ],
@@ -2882,7 +2882,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         313
       ]
     ],
@@ -2893,7 +2893,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         139
       ]
     ],
@@ -2905,7 +2905,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         390
       ]
     ],
@@ -2916,7 +2916,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         287
       ]
     ],
@@ -3097,7 +3097,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         634
       ]
     ],
@@ -3109,7 +3109,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         608
       ]
     ],
@@ -3121,7 +3121,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         587
       ]
     ],
@@ -3132,7 +3132,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         296
       ]
     ],
@@ -3224,7 +3224,7 @@
         313
       ]
     ],
-    "translation": "お使いのClaude Codeバージョンではこの機能は利用できません。すべてのツールは自動で承認されます。"
+    "translation": "お使いのBlackbox CLIバージョンではこの機能は利用できません。すべてのツールは自動で承認されます。"
   },
   "settings.sandbox.allowUnsandboxedCommands": {
     "message": "Allow unsandboxed commands",
@@ -3232,7 +3232,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         455
       ]
     ],
@@ -3244,7 +3244,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         435
       ]
     ],
@@ -3256,7 +3256,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         406
       ]
     ],
@@ -3268,7 +3268,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         489
       ]
     ],
@@ -3280,7 +3280,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         498
       ]
     ],
@@ -3292,7 +3292,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         465
       ]
     ],
@@ -3414,7 +3414,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         536
       ]
     ],
@@ -3426,7 +3426,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         356
       ]
     ],
@@ -3437,11 +3437,11 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         349
       ]
     ],
-    "translation": "Claude Code 標準のシステムプロンプトを使用"
+    "translation": "Blackbox CLI 標準のシステムプロンプトを使用"
   },
   "settings.tab.title": {
     "placeholders": {},
@@ -3514,12 +3514,12 @@
     "translation": "システム"
   },
   "settings.title": {
-    "message": "Claude Code Settings",
+    "message": "Blackbox CLI Settings",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxSettingsForm.tsx",
         708
       ],
       [
@@ -3694,7 +3694,7 @@
         111
       ]
     ],
-    "translation": "Claude Code"
+    "translation": "Blackbox CLI"
   },
   "system_info.description": {
     "placeholders": {},
@@ -3889,7 +3889,7 @@
         96
       ]
     ],
-    "translation": "Claude Code Viewer"
+    "translation": "Blackbox CLI Viewer"
   },
   "user.content.document.pdf": {
     "placeholders": {},

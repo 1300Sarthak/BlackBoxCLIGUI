@@ -3,7 +3,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { CheckCircle2, ChevronDown, ChevronRight, XCircle } from "lucide-react";
 import { type FC, type ReactNode, useState } from "react";
 import { useFeatureFlags } from "@/hooks/useFeatureFlags";
-import { claudeCodeMetaQuery, systemVersionQuery } from "@/lib/api/queries";
+import { blackboxCliMetaQuery, systemVersionQuery } from "@/lib/api/queries";
 import { Badge } from "./ui/badge";
 import {
   Collapsible,
@@ -72,8 +72,8 @@ export const SystemInfoCard: FC = () => {
     ...systemVersionQuery,
   });
 
-  const { data: claudeCodeMetaData } = useSuspenseQuery({
-    ...claudeCodeMetaQuery,
+  const { data: blackboxCliMetaData } = useSuspenseQuery({
+    ...blackboxCliMetaQuery,
   });
 
   const { flags } = useFeatureFlags();
@@ -90,7 +90,7 @@ export const SystemInfoCard: FC = () => {
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-6">
-        {/* Claude Code Viewer Version */}
+        {/* Blackbox CLI Viewer Version */}
         <div className="space-y-3">
           <h3 className="font-medium text-sm text-sidebar-foreground">
             <Trans id="system_info.viewer_version" />
@@ -105,7 +105,7 @@ export const SystemInfoCard: FC = () => {
           </div>
         </div>
 
-        {/* Claude Code Information */}
+        {/* Blackbox CLI Information */}
         <div className="space-y-3">
           <h3 className="font-medium text-sm text-sidebar-foreground">
             <Trans id="system_info.claude_code" />
@@ -116,7 +116,7 @@ export const SystemInfoCard: FC = () => {
                 <Trans id="system_info.executable_path" />
               </div>
               <div className="text-xs text-sidebar-foreground font-mono break-all">
-                {claudeCodeMetaData?.executablePath || (
+                {blackboxCliMetaData?.executablePath || (
                   <span className="text-sidebar-foreground/50">
                     <Trans id="system_info.unknown" />
                   </span>
@@ -129,7 +129,7 @@ export const SystemInfoCard: FC = () => {
                 <Trans id="system_info.version_label" />
               </span>
               <Badge variant="secondary" className="text-xs font-mono">
-                {claudeCodeMetaData?.version || (
+                {blackboxCliMetaData?.version || (
                   <Trans id="system_info.unknown" />
                 )}
               </Badge>

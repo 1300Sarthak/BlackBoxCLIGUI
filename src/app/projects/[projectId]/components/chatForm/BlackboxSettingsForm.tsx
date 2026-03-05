@@ -23,7 +23,7 @@ import {
   transformSchemaToForm,
 } from "./bbOptionsFormSchema";
 
-type ClaudeCodeSettingsFormProps = {
+type BlackboxSettingsFormProps = {
   value: CCOptionsSchema | undefined;
   onChange: (value: CCOptionsSchema | undefined) => void;
   disabled?: boolean;
@@ -230,7 +230,7 @@ const DisallowedToolsEditor: FC<{
   );
 };
 
-export const ClaudeCodeSettingsForm: FC<ClaudeCodeSettingsFormProps> = ({
+export const BlackboxSettingsForm: FC<BlackboxSettingsFormProps> = ({
   value,
   onChange,
   disabled = false,
@@ -660,7 +660,7 @@ export const ClaudeCodeSettingsForm: FC<ClaudeCodeSettingsFormProps> = ({
   );
 };
 
-export const ClaudeCodeSettingsPopover: FC<{
+export const BlackboxSettingsPopover: FC<{
   value: CCOptionsSchema | undefined;
   onChange: (value: CCOptionsSchema | undefined) => void;
   disabled?: boolean;
@@ -717,7 +717,7 @@ export const ClaudeCodeSettingsPopover: FC<{
               <XIcon className="w-4 h-4" />
             </Button>
           </div>
-          <ClaudeCodeSettingsForm
+          <BlackboxSettingsForm
             value={value}
             onChange={onChange}
             disabled={disabled}
