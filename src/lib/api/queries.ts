@@ -268,8 +268,8 @@ export const systemVersionQuery = {
   },
 } as const;
 
-export const claudeCodeMetaQuery = {
-  queryKey: ["cc", "meta"],
+export const blackboxCliMetaQuery = {
+  queryKey: ["bb", "meta"],
   queryFn: async () => {
     const response = await honoClient.api["blackbox-cli"].meta.$get();
 
@@ -283,14 +283,14 @@ export const claudeCodeMetaQuery = {
   },
 } as const;
 
-export const claudeCodeFeaturesQuery = {
-  queryKey: ["cc", "features"],
+export const blackboxCliFeaturesQuery = {
+  queryKey: ["bb", "features"],
   queryFn: async () => {
     const response = await honoClient.api["blackbox-cli"].features.$get();
 
     if (!response.ok) {
       throw new Error(
-        `Failed to fetch claude code features: ${response.statusText}`,
+        `Failed to fetch blackbox cli features: ${response.statusText}`,
       );
     }
 

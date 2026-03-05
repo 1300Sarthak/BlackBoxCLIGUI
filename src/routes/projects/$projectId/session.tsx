@@ -36,8 +36,8 @@ function RouteComponent() {
   const { sessionId, tab } = search;
 
   const title = projectName
-    ? `${projectName} - Claude Code Viewer`
-    : "Claude Code Viewer";
+    ? `${projectName} - Blackbox CLI Viewer`
+    : "Blackbox CLI Viewer";
 
   return (
     <ProtectedRoute>

@@ -6,6 +6,7 @@ import type { UserMessageInput } from "../../core/claude-code/functions/createMe
 import { BlackboxCliController } from "../../core/blackbox-cli/presentation/BlackboxCliController";
 import { BlackboxCliLifeCycleService } from "../../core/blackbox-cli/services/BlackboxCliLifeCycleService";
 import { BlackboxCliPermissionService } from "../../core/blackbox-cli/services/BlackboxCliPermissionService";
+import * as BBSessionProcess from "../../core/blackbox-cli/models/BBSessionProcess";
 import { effectToResponse } from "../../lib/effect/toEffectResponse";
 import type { HonoContext } from "../app";
 import { getHonoRuntime } from "../runtime";
@@ -77,6 +78,11 @@ const normalizeUserMessageInput = (
   };
 };
 
+const getSessionId = (p: BBSessionProcess.BBSessionProcessState): string | undefined => {
+  if (p.type === "not_initialized") return undefined;
+  return p.sessionId;
+};
+
 const blackboxCliRoutes = Effect.gen(function* () {
   const blackboxCliController = yield* BlackboxCliController;
   const blackboxCliLifeCycleService = yield* BlackboxCliLifeCycleService;
@@ -108,7 +114,7 @@ const blackboxCliRoutes = Effect.gen(function* () {
         processes: processes.map((p) => ({
           id: p.def.sessionProcessId,
           projectId: p.def.projectId,
-          sessionId: p.sessionId,
+          sessionId: getSessionId(p),
           status: p.type === "paused" ? "paused" : "running",
         })),
       });
@@ -138,7 +144,7 @@ const blackboxCliRoutes = Effect.gen(function* () {
         const body = c.req.valid("json");
         const input = normalizeUserMessageInput(body.input);
         const { baseSession, ...rest } = body;
-        
+
         const result = await Effect.runPromise(
           blackboxCliLifeCycleService.startSessionProcess({
             ...rest,
@@ -152,12 +158,13 @@ const blackboxCliRoutes = Effect.gen(function* () {
               locale: "en",
               theme: "system",
               searchHotkey: "command-k",
+              autoScheduleContinueOnRateLimit: true,
             },
           }).pipe(Effect.provide(runtime)),
         );
-        
+
         const sessionId = (await result.awaitSessionInitialized()).sessionId;
-        
+
         // Return format expected by frontend
         return c.json({
           sessionProcess: {
@@ -183,7 +190,7 @@ const blackboxCliRoutes = Effect.gen(function* () {
       async (c) => {
         const body = c.req.valid("json");
         const input = normalizeUserMessageInput(body.input);
-        
+
         const result = await Effect.runPromise(
           blackboxCliLifeCycleService.continueSessionProcess({
             ...c.req.param(),
@@ -191,7 +198,7 @@ const blackboxCliRoutes = Effect.gen(function* () {
             input,
           }).pipe(Effect.provide(runtime)),
         );
-        
+
         return c.json({
           sessionProcess: {
             id: result.sessionProcess.def.sessionProcessId,

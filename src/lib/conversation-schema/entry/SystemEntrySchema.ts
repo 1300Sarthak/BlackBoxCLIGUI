@@ -15,7 +15,7 @@ const SystemEntryWithContentSchema = BaseEntrySchema.extend({
   subtype: z.undefined().optional(),
 });
 
-// Stop hook summary entry (new format from Claude Code v2.0.76+)
+// Stop hook summary entry (new format from Blackbox CLI v2.0.76+)
 const StopHookSummaryEntrySchema = BaseEntrySchema.extend({
   type: z.literal("system"),
   subtype: z.literal("stop_hook_summary"),
@@ -38,7 +38,7 @@ const LocalCommandEntrySchema = BaseEntrySchema.extend({
   level: z.enum(["info"]),
 });
 
-// Turn duration entry (tracks duration of assistant turns, Claude Code v2.1+)
+// Turn duration entry (tracks duration of assistant turns, Blackbox CLI v2.1+)
 const TurnDurationEntrySchema = BaseEntrySchema.extend({
   type: z.literal("system"),
   subtype: z.literal("turn_duration"),
@@ -46,7 +46,7 @@ const TurnDurationEntrySchema = BaseEntrySchema.extend({
   slug: z.string().optional(),
 });
 
-// Compact boundary entry (new format from Claude Code)
+// Compact boundary entry (new format from Blackbox CLI)
 const CompactBoundaryEntrySchema = BaseEntrySchema.extend({
   type: z.literal("system"),
   subtype: z.literal("compact_boundary"),

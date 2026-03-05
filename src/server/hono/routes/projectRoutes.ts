@@ -3,7 +3,7 @@ import { Effect } from "effect";
 import { Hono } from "hono";
 import { z } from "zod";
 import { AgentSessionController } from "../../core/agent-session/presentation/AgentSessionController";
-import { ClaudeCodeController } from "../../core/claude-code/presentation/ClaudeCodeController";
+import { BlackboxCliController } from "../../core/blackbox-cli/presentation/BlackboxCliController";
 import { FileSystemController } from "../../core/file-system/presentation/FileSystemController";
 import { GitController } from "../../core/git/presentation/GitController";
 import { CommitRequestSchema } from "../../core/git/schema";
@@ -17,7 +17,7 @@ const projectRoutes = Effect.gen(function* () {
   const projectController = yield* ProjectController;
   const sessionController = yield* SessionController;
   const agentSessionController = yield* AgentSessionController;
-  const claudeCodeController = yield* ClaudeCodeController;
+  const blackboxCliController = yield* BlackboxCliController;
   const fileSystemController = yield* FileSystemController;
   const gitController = yield* GitController;
 
@@ -155,13 +155,13 @@ const projectRoutes = Effect.gen(function* () {
       )
 
       /**
-       * claude code routes
+       * blackbox cli routes
        */
-      .get("/:projectId/claude-commands", async (c) => {
+      .get("/:projectId/blackbox-commands", async (c) => {
         const response = await effectToResponse(
           c,
-          claudeCodeController
-            .getClaudeCommands({
+          blackboxCliController
+            .getBlackboxCommands({
               ...c.req.param(),
             })
             .pipe(Effect.provide(runtime)),
@@ -171,7 +171,7 @@ const projectRoutes = Effect.gen(function* () {
       .get("/:projectId/mcp/list", async (c) => {
         const response = await effectToResponse(
           c,
-          claudeCodeController
+          blackboxCliController
             .getMcpListRoute({
               ...c.req.param(),
             })

@@ -4,7 +4,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         374
       ]
     ],
@@ -78,7 +78,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         214
       ]
     ],
@@ -134,7 +134,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         106
       ]
     ],
@@ -252,7 +252,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         114
       ]
     ],
@@ -839,7 +839,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         693
       ]
     ],
@@ -1620,7 +1620,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         647
       ]
     ],
@@ -1631,7 +1631,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         596
       ]
     ],
@@ -1642,7 +1642,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         620
       ]
     ],
@@ -1653,7 +1653,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         514
       ]
     ],
@@ -1664,7 +1664,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         301
       ]
     ],
@@ -1837,7 +1837,7 @@
         97
       ]
     ],
-    "translation": "Select sound to play when Claude Code task completes"
+    "translation": "Select sound to play when Blackbox CLI task completes"
   },
   "notification.none": {
     "placeholders": {},
@@ -2079,7 +2079,7 @@
         74
       ]
     ],
-    "translation": "Navigate to the directory to set up as a Claude Code project. If CLAUDE.md exists, it describes the project; otherwise initialize with <0>/init</0>."
+    "translation": "Navigate to the directory to set up as a Blackbox CLI project. If CLAUDE.md exists, it describes the project; otherwise initialize with <0>/init</0>."
   },
   "project.setup.title": {
     "placeholders": {},
@@ -2123,7 +2123,7 @@
         31
       ]
     ],
-    "translation": "No Claude Code projects found in your ~/.claude/projects directory. Start a conversation with Claude Code to set up your first project."
+    "translation": "No Blackbox CLI projects found in your ~/.claude/projects directory. Start a conversation with Blackbox CLI to set up your first project."
   },
   "project_list.no_projects.title": {
     "placeholders": {},
@@ -2156,7 +2156,7 @@
         13
       ]
     ],
-    "translation": "View Claude Code conversation history and project operations"
+    "translation": "View Blackbox CLI conversation history and project operations"
   },
   "projects.page.loading": {
     "placeholders": {},
@@ -2223,7 +2223,7 @@
         170
       ]
     ],
-    "translation": "Configure a scheduled job to send messages to Claude Code"
+    "translation": "Configure a scheduled job to send messages to Blackbox CLI"
   },
   "scheduler.dialog.title.create": {
     "placeholders": {},
@@ -2352,7 +2352,7 @@
     "translation": "/ for command completion, @ for file completion"
   },
   "scheduler.form.message.placeholder": {
-    "message": "Type message to send to Claude Code... (/ for commands, @ for files)",
+    "message": "Type message to send to Blackbox CLI... (/ for commands, @ for files)",
     "placeholders": {},
     "comments": [],
     "origin": [
@@ -2361,7 +2361,7 @@
         274
       ]
     ],
-    "translation": "Type message to send to Claude Code... (/ for commands, @ for files)"
+    "translation": "Type message to send to Blackbox CLI... (/ for commands, @ for files)"
   },
   "scheduler.form.name": {
     "placeholders": {},
@@ -2740,7 +2740,7 @@
         668
       ]
     ],
-    "translation": "Claude Code is processing..."
+    "translation": "Blackbox CLI is processing..."
   },
   "session.scheduled_messages.disabled": {
     "placeholders": {},
@@ -2860,7 +2860,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         530
       ]
     ],
@@ -2882,7 +2882,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         313
       ]
     ],
@@ -2893,7 +2893,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         139
       ]
     ],
@@ -2905,7 +2905,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         390
       ]
     ],
@@ -2916,7 +2916,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         287
       ]
     ],
@@ -3097,7 +3097,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         634
       ]
     ],
@@ -3109,7 +3109,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         608
       ]
     ],
@@ -3121,7 +3121,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         587
       ]
     ],
@@ -3132,7 +3132,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         296
       ]
     ],
@@ -3224,7 +3224,7 @@
         313
       ]
     ],
-    "translation": "This feature is not available in your Claude Code version. All tools are automatically approved."
+    "translation": "This feature is not available in your Blackbox CLI version. All tools are automatically approved."
   },
   "settings.sandbox.allowUnsandboxedCommands": {
     "message": "Allow unsandboxed commands",
@@ -3232,7 +3232,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         455
       ]
     ],
@@ -3244,7 +3244,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         435
       ]
     ],
@@ -3256,7 +3256,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         406
       ]
     ],
@@ -3268,7 +3268,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         489
       ]
     ],
@@ -3280,7 +3280,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         498
       ]
     ],
@@ -3292,7 +3292,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         465
       ]
     ],
@@ -3351,7 +3351,7 @@
         203
       ]
     ],
-    "translation": "Automatically schedule a continue message when Claude hits rate limits"
+    "translation": "Automatically schedule a continue message when Blackbox hits rate limits"
   },
   "settings.session.display": {
     "placeholders": {},
@@ -3414,7 +3414,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         536
       ]
     ],
@@ -3426,7 +3426,7 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         356
       ]
     ],
@@ -3437,11 +3437,11 @@
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         349
       ]
     ],
-    "translation": "Use Claude Code standard system prompt"
+    "translation": "Use Blackbox CLI standard system prompt"
   },
   "settings.tab.title": {
     "placeholders": {},
@@ -3514,12 +3514,12 @@
     "translation": "System"
   },
   "settings.title": {
-    "message": "Claude Code Settings",
+    "message": "Blackbox CLI Settings",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
-        "src/app/projects/[projectId]/components/chatForm/ClaudeCodeSettingsForm.tsx",
+        "src/app/projects/[projectId]/components/chatForm/BlackboxCodeSettingsForm.tsx",
         708
       ],
       [
@@ -3694,7 +3694,7 @@
         111
       ]
     ],
-    "translation": "Claude Code"
+    "translation": "Blackbox CLI"
   },
   "system_info.description": {
     "placeholders": {},
@@ -3793,7 +3793,7 @@
         31
       ]
     ],
-    "translation": "Approve or reject tool executions before Claude runs them, giving you full control over actions"
+    "translation": "Approve or reject tool executions before Blackbox runs them, giving you full control over actions"
   },
   "system_info.feature.tool_approval.title": {
     "placeholders": {},
@@ -3889,7 +3889,7 @@
         96
       ]
     ],
-    "translation": "Claude Code Viewer"
+    "translation": "Blackbox CLI Viewer"
   },
   "user.content.document.pdf": {
     "placeholders": {},

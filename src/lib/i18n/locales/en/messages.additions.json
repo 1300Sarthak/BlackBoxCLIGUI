@@ -81,7 +81,7 @@
     "translation": "Settings"
   },
   "settings.title": {
-    "translation": "Claude Code Settings"
+    "translation": "Blackbox CLI Settings"
   },
   "settings.forkSession": {
     "translation": "Fork session (create new session based on current)"
@@ -93,7 +93,7 @@
     "translation": "Disallowed Tools"
   },
   "settings.systemPrompt.usePreset": {
-    "translation": "Use Claude Code standard system prompt"
+    "translation": "Use Blackbox CLI standard system prompt"
   },
   "settings.systemPrompt.additional": {
     "translation": "Additional System Prompt"

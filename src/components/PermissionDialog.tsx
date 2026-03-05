@@ -107,10 +107,10 @@ export const PermissionDialog = ({
         <DialogHeader className="flex-shrink-0">
           <DialogTitle className="flex items-center gap-2">
             <span className="text-orange-600">⚠️</span>
-            Claude Code Permission Request
+            Blackbox CLI Permission Request
           </DialogTitle>
           <DialogDescription>
-            Claude Code wants to execute the following tool and needs your
+            Blackbox CLI wants to execute the following tool and needs your
             permission.
           </DialogDescription>
         </DialogHeader>

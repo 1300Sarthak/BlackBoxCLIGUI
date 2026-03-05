@@ -33,7 +33,7 @@ import type {
   ImageBlockParam,
 } from "../../../../../server/core/claude-code/schema";
 import { useConfig } from "../../../../hooks/useConfig";
-import { ClaudeCodeSettingsPopover } from "./ClaudeCodeSettingsForm";
+import { BlackboxSettingsPopover } from "./BlackboxSettingsForm";
 import type { CommandCompletionRef } from "./CommandCompletion";
 import { getDefaultCCOptions } from "./bbOptionsFormSchema";
 import { isInCompletionContext } from "./completionUtils";
@@ -533,7 +533,7 @@ export const ChatInput: FC<ChatInputProps> = ({
                   </span>
                 )}
                 {enableCCOptions && (
-                  <ClaudeCodeSettingsPopover
+                  <BlackboxSettingsPopover
                     value={bbOptions}
                     onChange={setCCOptions}
                     disabled={isPending || disabled}
