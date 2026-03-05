@@ -5,8 +5,8 @@ import { NodeContext, NodeFileSystem, NodePath } from "@effect/platform-node";
 import { Effect, Layer } from "effect";
 import { afterEach, beforeEach, describe, expect, test } from "vitest";
 import { DEFAULT_LOCALE } from "../../../../lib/i18n/localeDetection";
-import { ClaudeCodeLifeCycleService } from "../../claude-code/services/ClaudeCodeLifeCycleService";
-import { ClaudeCodeSessionProcessService } from "../../claude-code/services/ClaudeCodeSessionProcessService";
+import { BlackboxCliLifeCycleService } from "../../blackbox-cli/services/BlackboxCliLifeCycleService";
+import { BlackboxCliSessionProcessService } from "../../blackbox-cli/services/BlackboxCliSessionProcessService";
 import { EnvService } from "../../platform/services/EnvService";
 import { UserConfigService } from "../../platform/services/UserConfigService";
 import { ProjectRepository } from "../../project/infrastructure/ProjectRepository";
@@ -18,7 +18,7 @@ describe("SchedulerService", () => {
   let testDir: string;
 
   const mockSessionProcessService = Layer.succeed(
-    ClaudeCodeSessionProcessService,
+    BlackboxCliSessionProcessService,
     {
       startSessionProcess: () =>
         Effect.succeed({ sessionProcess: {} as never, task: {} as never }),
@@ -39,7 +39,7 @@ describe("SchedulerService", () => {
     },
   );
 
-  const mockLifeCycleService = Layer.succeed(ClaudeCodeLifeCycleService, {
+  const mockLifeCycleService = Layer.succeed(BlackboxCliLifeCycleService, {
     startTask: () => Effect.void,
     continueTask: () => Effect.void,
   } as never);
@@ -73,8 +73,8 @@ describe("SchedulerService", () => {
     | import("@effect/platform").FileSystem.FileSystem
     | import("@effect/platform").Path.Path
     | import("@effect/platform-node").NodeContext.NodeContext
-    | ClaudeCodeSessionProcessService
-    | ClaudeCodeLifeCycleService
+    | BlackboxCliSessionProcessService
+    | BlackboxCliLifeCycleService
     | ProjectRepository
     | UserConfigService
     | EnvService

@@ -110,19 +110,19 @@ export const sessionDetailQuery = (projectId: string, sessionId: string) =>
     },
   }) as const;
 
-export const claudeCommandsQuery = (projectId: string) =>
+export const blackboxCommandsQuery = (projectId: string) =>
   ({
-    queryKey: ["claude-commands", projectId],
+    queryKey: ["blackbox-commands", projectId],
     queryFn: async () => {
       const response = await honoClient.api.projects[":projectId"][
-        "claude-commands"
+        "blackbox-commands"
       ].$get({
         param: { projectId },
       });
 
       if (!response.ok) {
         throw new Error(
-          `Failed to fetch claude commands: ${response.statusText}`,
+          `Failed to fetch blackbox commands: ${response.statusText}`,
         );
       }
 

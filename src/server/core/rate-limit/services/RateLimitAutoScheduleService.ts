@@ -1,8 +1,8 @@
 import { FileSystem, Path } from "@effect/platform";
 import { Context, Effect, Layer, Ref } from "effect";
 import type { InferEffect } from "../../../lib/effect/types";
-import { ClaudeCodeLifeCycleService } from "../../claude-code/services/ClaudeCodeLifeCycleService";
-import { ClaudeCodeSessionProcessService } from "../../claude-code/services/ClaudeCodeSessionProcessService";
+import { BlackboxCliLifeCycleService } from "../../blackbox-cli/services/BlackboxCliLifeCycleService";
+import { BlackboxCliSessionProcessService } from "../../blackbox-cli/services/BlackboxCliSessionProcessService";
 import { EventBus } from "../../events/services/EventBus";
 import type { InternalEventDeclaration } from "../../events/types/InternalEventDeclaration";
 import { UserConfigService } from "../../platform/services/UserConfigService";
@@ -35,13 +35,13 @@ type SessionChangedListener = (
 const LayerImpl = Effect.gen(function* () {
   const eventBus = yield* EventBus;
   const userConfigService = yield* UserConfigService;
-  const sessionProcessService = yield* ClaudeCodeSessionProcessService;
+  const sessionProcessService = yield* BlackboxCliSessionProcessService;
   const schedulerService = yield* SchedulerService;
   const fs = yield* FileSystem.FileSystem;
   const pathService = yield* Path.Path;
   const schedulerConfigBaseDir = yield* SchedulerConfigBaseDir;
   const projectRepository = yield* ProjectRepository;
-  const lifeCycleService = yield* ClaudeCodeLifeCycleService;
+  const lifeCycleService = yield* BlackboxCliLifeCycleService;
 
   // Store listener reference for cleanup
   const listenerRef = yield* Ref.make<SessionChangedListener | null>(null);
@@ -178,7 +178,7 @@ const LayerImpl = Effect.gen(function* () {
     Layer.succeed(SchedulerConfigBaseDir, schedulerConfigBaseDir),
     Layer.succeed(ProjectRepository, projectRepository),
     Layer.succeed(UserConfigService, userConfigService),
-    Layer.succeed(ClaudeCodeLifeCycleService, lifeCycleService),
+    Layer.succeed(BlackboxCliLifeCycleService, lifeCycleService),
   );
 
   /**

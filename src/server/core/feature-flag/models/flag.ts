@@ -1,22 +1,22 @@
 export type Flag =
   | {
-      name: "tool-approval";
+      name: "canUseTool";
       enabled: boolean;
     }
   | {
-      name: "agent-sdk";
+      name: "agentSdk";
       enabled: boolean;
     }
   | {
-      name: "sidechain-separation";
+      name: "sidechainSeparation";
       enabled: boolean;
     }
   | {
-      name: "uuid-on-sdk-message";
+      name: "uuidOnSDKMessage";
       enabled: boolean;
     }
   | {
-      name: "run-skills-directly";
+      name: "runSkillsDirectly";
       enabled: boolean;
     };
 
